@@ -1,0 +1,22 @@
+---
+description: React/TypeScript conventions for Grow
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# React & TypeScript
+
+- Functional components only. Colocate hooks; extract when logic is reused twice.
+- **TanStack Query** — server data (workouts, exercises, analytics tables).
+- **Zustand** — in-progress workout session only (sets being logged, exercise order). Do not put persisted data in Zustand.
+- **shadcn/ui + Tailwind** — use existing primitives; analytical tone, no motivational fluff.
+- Weight: accept display unit in forms; convert to/from `kg` in `src/lib/` — never store lbs in the database.
+- Working sets require RPE (0.5 increments) before save; warmups optional.
+
+```tsx
+// ✅ Server state
+const { data } = useQuery({ queryKey: ['workouts'], queryFn: fetchWorkouts });
+
+// ✅ Ephemeral session state
+const addSet = useWorkoutStore((s) => s.addSet);
+```

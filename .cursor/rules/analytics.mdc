@@ -1,0 +1,32 @@
+---
+description: Training analytics and e1RM domain logic
+globs: "**/{lib,analytics,e1rm}/**/*.{ts,tsx,sql}"
+alwaysApply: false
+---
+
+# Analytics domain
+
+Decisions live in `phases.txt`. Implement exactly:
+
+**Set inclusion:** only `set_type = 'working'` counts toward volume, avg RPE, e1RM, fatigue.
+
+**Time buckets (hybrid):**
+- Calendar week (user `week_start_day`) → `weekly_volume`, stalls, performance drop
+- Rolling 7-day → `fatigue_signals`, deload score
+- UI: never label both as "this week"
+
+**e1RM:** best working set per exercise per session; **reps ≤ 10 only**. Formula by `movement_type`:
+
+| movement_type | formula |
+|---|---|
+| upper_push | Mayhew |
+| upper_pull | Epley |
+| lower_compound | Lombardi |
+| lower_hinge | Brzycki |
+| isolation | Wathen |
+
+**Performance drop:** e1RM down ≥3% for 2 consecutive calendar weeks on `is_tracked` exercises.
+
+**Deload:** tiered score 0–100 (lean/moderate/strong) + plain-language reason — not a hard AND gate.
+
+Put formulas in pure functions under `src/lib/` with unit tests.

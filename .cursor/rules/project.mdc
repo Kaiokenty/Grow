@@ -1,0 +1,13 @@
+---
+description: Grow project scope and phase discipline
+alwaysApply: true
+---
+
+# Grow — core guardrails
+
+- Read `phases.txt` before new features, schema, or analytics logic.
+- Build Phase 0 → 1 → 2 → 3 in order. No Phase 3 until Phase 2 is trustworthy on real data.
+- Solo personal app first — avoid generic-user abstractions and out-of-scope features (social, streaks, badges, nutrition, iOS).
+- Minimize diff scope; match existing patterns once scaffold exists.
+- Do not commit `.env`, Supabase keys, or credentials.
+- Do not create git commits unless the user asks.

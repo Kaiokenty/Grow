@@ -1,0 +1,281 @@
+# Grow — Development Phases
+# Workout Tracking & Analytics App
+# Generated after grill session — decisions locked below.
+
+================================================================================
+LOCKED DECISIONS (reference during build)
+================================================================================
+
+SET LOGGING
+- Each set tagged: working | warmup (default: working)
+- Only working sets count toward volume, RPE averages, e1RM, fatigue
+- RPE required on working sets; optional on warmups
+- RPE precision: 0.5 increments (6, 6.5, 7 … 10)
+
+TIME BUCKETS
+- Hybrid model:
+  - Calendar week → weekly_volume, per-lift trends, stall detection, performance drop
+  - Rolling 7-day → fatigue_signals, RPE trend, deload score
+- User setting: first day of week (default Monday)
+- UI labels must differ: "Week of Jun 2" vs "Last 7 days"
+
+WEIGHT
+- Store canonical kg in database (numeric)
+- User setting: display unit kg | lbs (convert on read/write in UI)
+
+e1RM & PERFORMANCE DROP
+- Input: best working set per exercise per session, reps ≤ 10 only
+- Formula selected by exercise.movement_type:
+  - upper_push    → Mayhew:   w / (0.522 + 0.419 × e^(-0.055 × r))
+  - upper_pull    → Epley:    w × (1 + r/30)
+  - lower_compound → Lombardi: w × r^0.10
+  - lower_hinge   → Brzycki:  w / (1.0278 - 0.0278 × r)
+  - isolation     → Wathen:   w / (0.488 + 0.538 × e^(-0.075 × r))
+  - default       → Epley (fallback if movement_type unset)
+- performance_drop_detected: e1RM down ≥3% for 2 consecutive calendar weeks
+- Applies to exercises user marks as tracked for progression (anchor flag)
+
+ANCHOR / TRACKED EXERCISES
+- User explicitly marks which exercises drive progression charts, drop detection,
+  and weekly summary callouts (can mark all lifts if desired)
+- Not auto-limited to compounds
+
+DELOAD RECOMMENDATION
+- Tiered score 0–100 → lean | moderate | strong deload
+- Inputs (weighted): rolling 7-day avg RPE, RPE trend, performance_drop,
+  consecutive high-RPE sessions (RPE ≥ 8.5 on working sets)
+- Plain-language reason always shown alongside score
+- NOT a hard AND gate (original spec superseded)
+
+TRAINING BLOCKS
+- MVP: manual start/end dates + optional name/notes
+- Future: auto-suggest boundaries from deload events
+
+SESSION & PROGRAMS
+- Freeform workout logging (add exercises ad hoc each session)
+- Stored workout programs (MVP): named ordered exercise list, no prescribed sets
+- Phase 3+: full prescription (sets/reps/RPE targets) + multi-week mesocycles
+
+ANALYTICS UI
+- Chart time range: user setting (default 6 weeks on first launch)
+
+CLIENT STATE
+- Server state: TanStack Query
+- Active workout session: Zustand
+
+AUTH (recommended — user asked)
+- Supabase Auth: email + password
+- Google OAuth optional later; not MVP
+
+INFRASTRUCTURE / DATA STORAGE
+- Database: Supabase Postgres (all workout, exercise, set, analytics tables)
+- Auth: Supabase Auth (user_id on all rows; RLS per user)
+- Realtime: Supabase Realtime (optional — nice for sync, not required MVP)
+- No custom backend server for MVP
+- Analytics refresh: Postgres function or Supabase Edge Function triggered on
+  workout save (recalculate weekly_volume, exercise_performance, fatigue_signals)
+- File storage: none for MVP (no videos/images). Supabase Storage reserved for
+  future export/import or attachments.
+
+TECH STACK (unchanged from spec)
+- Frontend: React + Vite (or Next.js — pick at Phase 0) + shadcn/ui + Tailwind
+- Charts: Recharts
+- Backend: Supabase only
+
+OUT OF SCOPE (all phases until explicitly promoted)
+- Social, streaks, badges
+- Video exercise library
+- Nutrition tracking
+- iOS native app
+- Multi-user / trainer mode
+- Apple Health / HRV (recovery_metrics table stubbed for future)
+
+================================================================================
+PHASE 0 — PROJECT SCAFFOLD & DATA LAYER
+================================================================================
+Goal: Runnable app shell + Supabase schema deployed. No features yet.
+
+Tasks:
+[ ] Initialize React app + Tailwind + shadcn/ui + TanStack Query + Zustand
+[ ] Create Supabase project (dev + prod)
+[ ] Enable email/password auth in Supabase dashboard
+[ ] Deploy database schema (migrations):
+
+    -- Core logging
+    users_settings (user_id, display_unit, week_start_day, chart_weeks, ...)
+    exercises (id, user_id, name, category, muscle_groups[], is_compound,
+               movement_type, is_tracked, e1rm_formula override nullable)
+    workouts (id, user_id, date, duration_minutes, notes, program_id nullable)
+    sets (id, workout_id, exercise_id, set_number, set_type, reps, weight_kg,
+          rpe, notes)
+
+    -- Programs (MVP: exercise list only)
+    programs (id, user_id, name, notes)
+    program_exercises (program_id, exercise_id, sort_order)
+
+    -- Training blocks
+    training_blocks (id, user_id, name, start_date, end_date, notes)
+
+    -- Analytics (pre-calculated)
+    weekly_volume (user_id, week_start, tonnage, total_sets, compound_volume,
+                   avg_rpe, workouts_completed)
+    exercise_performance (user_id, exercise_id, week_start, e1rm, best_set_json,
+                          weekly_volume, weekly_sets)
+    fatigue_signals (user_id, calculated_at, rolling_7d_avg_rpe, rpe_trend,
+                     performance_drop_detected, dropped_exercises[],
+                     consecutive_high_rpe_sessions, deload_score, deload_tier)
+
+    -- Future stub
+    recovery_metrics (user_id, date, sleep_hours, hrv, resting_hr, body_weight_kg)
+
+[ ] Row Level Security policies on all tables (user_id = auth.uid())
+[ ] Seed migration: ~30–50 common exercises (global template copied to user on signup)
+[ ] e1RM calculation library (pure functions, unit-tested):
+    - formula dispatch by movement_type
+    - reps ≤ 10 guard
+    - best-set selection per session
+[ ] Analytics refresh function (SQL or Edge Function) — stub that runs on workout save
+
+Exit criteria:
+- User can sign up / sign in
+- Empty dashboard renders
+- Schema + RLS verified in Supabase
+
+================================================================================
+PHASE 1 — LOGGING (MVP CORE)
+================================================================================
+Goal: Log workouts reliably every session. Data quality rules enforced at input.
+
+Depends on: Phase 0
+
+Tasks:
+[ ] Auth UI: sign up, sign in, sign out, password reset
+[ ] User settings page: display unit (kg/lbs), first day of week, chart weeks
+[ ] Exercise library:
+    - List, search, create, edit
+    - Fields: name, category, muscle groups, is_compound, movement_type, is_tracked
+    - Seed copy on first login
+[ ] Workout programs:
+    - Create/edit program (name + ordered exercise list)
+    - "Start workout from program" pre-populates exercise list
+[ ] Workout logger (Zustand session store):
+    - Create workout (date, notes)
+    - Add/remove/reorder exercises
+    - Log sets: reps, weight (display unit → store kg), RPE, set_type (working/warmup)
+    - Default new sets to working; RPE required before save on working sets
+    - Previous session auto-fill: same exercise → last weight/reps/RPE
+    - Save workout → persist sets → trigger analytics refresh
+[ ] Workout history:
+    - List past workouts (date, duration, exercise count)
+    - Detail view: all sets with warmup/working distinction
+[ ] Edit/delete workout (recalculate analytics on change)
+
+Exit criteria:
+- Complete full-body session logged with warmups excluded from analytics
+- Data visible in Supabase with correct kg storage and set_type
+- Programs reusable across sessions
+
+================================================================================
+PHASE 2 — ANALYTICS DASHBOARD
+================================================================================
+Goal: Answer "Am I progressing?" and "Should I deload?" in plain language.
+
+Depends on: Phase 1 (≥3 weeks of real data recommended for meaningful charts)
+
+Tasks:
+[ ] Analytics refresh (complete implementation):
+    - weekly_volume on calendar week boundary (respect user week_start_day)
+    - exercise_performance per exercise per week (e1RM, best set, volume)
+    - fatigue_signals on rolling 7-day window
+    - deload_score + deload_tier + reason string
+[ ] Dashboard layout (data-forward, shadcn, no fluff)
+
+Charts (Recharts, range from user setting — default 6 weeks):
+[ ] Weekly volume: tonnage + total sets (toggle), compound vs total
+[ ] Per-lift progress: e1RM over time for is_tracked exercises
+[ ] RPE trend: rolling 7-day avg with calendar week overlay optional
+
+Cards:
+[ ] Fatigue / deload card: score, tier (lean/moderate/strong), plain-language reason
+[ ] Weekly summary (template-based NLG MVP, no LLM required):
+    - Tracked lifts: up / flat / down vs prior week
+    - Volume trend by muscle group
+    - RPE direction (last 7 days)
+    - Example: "Squat e1RM up 2%. Chest volume flat. RPE trending high — lean deload."
+
+Progression logic:
+[ ] Stall flag: same weight × reps 2+ weeks at similar RPE (±0.5)
+[ ] performance_drop_detected per tracked exercise (e1RM ≥3% down 2 weeks)
+
+Training blocks:
+[ ] Manual block create/end (name, dates, notes)
+[ ] Block summary: total volume, sets, avg RPE, PRs, top exercises
+[ ] Compare any two blocks: volume % delta, RPE delta, PRs
+
+Exit criteria:
+- After logging, dashboard updates within one refresh cycle
+- Deload card produces sensible tier + explanation on test scenarios
+- Weekly summary readable without interpreting raw charts
+
+================================================================================
+PHASE 3 — AI PROGRAMMING
+================================================================================
+Goal: Mesocycle planning + auto-regulation based on your own history.
+
+Depends on: Phase 2 trustworthy for ≥1 full mesocycle of personal use
+
+Tasks:
+[ ] Extend programs to full prescription:
+    - Per exercise: target sets, reps range, RPE target per week
+[ ] Mesocycle entity (4–6 weeks):
+    - Week-by-week volume targets
+    - Progressive overload rules
+[ ] AI plan generation:
+    - Input: training history, tracked lift trends, goals, days/week, equipment
+    - Output: mesocycle plan with progressive volume
+[ ] Auto-regulate:
+    - After each week: adjust next week from RPE + performance signals
+[ ] Block debrief:
+    - LLM summary: what worked, what stalled, suggested next block focus
+[ ] Program evolution: MVP exercise-list programs upgrade to full prescriptions
+
+Exit criteria:
+- Generate a 4-week plan from real history
+- Week 2 plan adjusts based on week 1 RPE/performance
+- Block debrief summarizes completed manual or AI block
+
+================================================================================
+PHASE 4 — FUTURE (not scheduled — promote when ready)
+================================================================================
+
+[ ] Auto-suggest training block boundaries from deload events
+[ ] recovery_metrics: manual entry → later Apple Health / HRV integration
+[ ] CSV export / import (Strong, Hevy migration)
+[ ] Google OAuth
+[ ] Supabase Realtime for multi-device live sync
+[ ] iOS wrapper (Capacitor or native)
+[ ] LLM-powered weekly summary (replace template NLG)
+[ ] Effort-adjusted volume metric (tonnage × RPE factor)
+[ ] Deload outcome tracking (did metrics rebound post-deload?)
+[ ] Multi-user / trainer mode
+[ ] App name + branding (TBD)
+
+================================================================================
+BUILD ORDER SUMMARY
+================================================================================
+
+Phase 0 → Phase 1 → Phase 2 → Phase 3 → Phase 4 (as needed)
+
+Critical path:
+  schema + e1RM lib → logging UX → analytics refresh → dashboard → AI
+
+Do NOT start Phase 3 until Phase 2 weekly summaries feel right on your own data.
+
+================================================================================
+OPEN ITEMS (minor — resolve during Phase 0/1)
+================================================================================
+
+[ ] React framework: Vite SPA vs Next.js (recommend Vite SPA for solo dashboard app)
+[ ] Deload score weights/thresholds — tune in Phase 2 with real data
+[ ] App name TBD
+[ ] Exact list of ~30–50 seed exercises (derive from your current program)
