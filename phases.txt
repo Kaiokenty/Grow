@@ -96,10 +96,10 @@ PHASE 0 — PROJECT SCAFFOLD & DATA LAYER
 Goal: Runnable app shell + Supabase schema deployed. No features yet.
 
 Tasks:
-[ ] Initialize React app + Tailwind + shadcn/ui + TanStack Query + Zustand
-[ ] Create Supabase project (dev + prod)
-[ ] Enable email/password auth in Supabase dashboard
-[ ] Deploy database schema (migrations):
+[x] Initialize React app + Tailwind + shadcn/ui + TanStack Query + Zustand
+[x] Create Supabase project (dev + prod)
+[x] Enable email/password auth in Supabase dashboard
+[x] Deploy database schema (migrations):
 
     -- Core logging
     users_settings (user_id, display_unit, week_start_day, chart_weeks, ...)
@@ -128,18 +128,38 @@ Tasks:
     -- Future stub
     recovery_metrics (user_id, date, sleep_hours, hrv, resting_hr, body_weight_kg)
 
-[ ] Row Level Security policies on all tables (user_id = auth.uid())
-[ ] Seed migration: ~30–50 common exercises (global template copied to user on signup)
-[ ] e1RM calculation library (pure functions, unit-tested):
+[x] Row Level Security policies on all tables (user_id = auth.uid())
+[x] Seed migration: ~30–50 common exercises (global template copied to user on signup)
+[x] e1RM calculation library (pure functions, unit-tested):
     - formula dispatch by movement_type
     - reps ≤ 10 guard
     - best-set selection per session
-[ ] Analytics refresh function (SQL or Edge Function) — stub that runs on workout save
+[x] Analytics refresh function (SQL or Edge Function) — stub that runs on workout save
 
 Exit criteria:
 - User can sign up / sign in
 - Empty dashboard renders
 - Schema + RLS verified in Supabase
+
+================================================================================
+PHASE 0.5 — BODY HEATMAP (UI PROTOTYPE)
+================================================================================
+Goal: Reusable muscle heatmap with mock volume; ready for Phase 2 data.
+
+Depends on: Phase 0
+Blocks: nothing (Phase 1 can proceed in parallel)
+
+Tasks:
+[ ] Install @mjcdev/react-body-highlighter
+[ ] muscle_groups → SVG slug mapping lib (src/lib/body-map/)
+[ ] BodyHeatmap component + mock volume
+[ ] Dashboard preview card + /body-map playground
+[ ] Unit tests for mapping + intensity bucketing
+
+Exit criteria:
+- Heatmap renders on Dashboard and /body-map
+- Front/back toggle works; click shows muscle detail
+- No Supabase dependency
 
 ================================================================================
 PHASE 1 — LOGGING (MVP CORE)

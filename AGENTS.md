@@ -35,7 +35,7 @@ Nested `AGENTS.md` files may be added under `src/` or `supabase/` if those areas
 
 ## Commands
 
-> Greenfield — update this section when `package.json` exists. Expected commands:
+> Commands (Phase 0 scaffold):
 
 ```bash
 npm install
@@ -75,9 +75,9 @@ Never commit `.env` or keys. Use `.env.example` with empty placeholders.
 
 ## Phase discipline
 
-Build in order: **Phase 0 → 1 → 2 → 3** (see `phases.txt`). Do not start Phase 3 (AI programming) until Phase 2 analytics feel right on real data.
+Build in order: **Phase 0 → 0.5 → 1 → 2 → 3** (see `phases.txt`). Do not start Phase 3 (AI programming) until Phase 2 analytics feel right on real data.
 
-Current focus: **Phase 0** — scaffold + Supabase schema + e1RM lib.
+Current focus: **Phase 0.5** — body heatmap UI prototype (`@mjcdev/react-body-highlighter`, mock volume).
 
 ## Non-obvious domain rules (summary)
 
