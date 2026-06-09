@@ -13,6 +13,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { PageSkeleton } from '@/components/ui/page-skeleton'
 import { useAuth } from '@/hooks/useAuth'
+import { useUserSettings } from '@/hooks/useUserSettings'
+import { formatTonnage } from '@/lib/units'
 import {
   useBlockComparison,
   useBlockSummary,
@@ -30,6 +32,8 @@ function formatBlockRange(start: string, end: string | null) {
 
 export function BlocksPage() {
   const { user } = useAuth()
+  const { data: settings } = useUserSettings(user?.id)
+  const displayUnit = settings?.display_unit ?? 'kg'
   const { data: blocks = [], isLoading, error } = useTrainingBlocks(user?.id)
   const startBlock = useStartTrainingBlock(user?.id)
   const endBlock = useEndTrainingBlock(user?.id)
@@ -220,7 +224,7 @@ export function BlocksPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <Stat label="Tonnage" value={`${Math.round(summary.tonnage)} kg`} />
+            <Stat label="Tonnage" value={formatTonnage(summary.tonnage, displayUnit)} />
             <Stat label="Working sets" value={String(summary.total_sets)} />
             <Stat label="Avg RPE" value={summary.avg_rpe != null ? String(summary.avg_rpe) : '—'} />
             <Stat label="PRs" value={String(summary.pr_count)} />
@@ -231,7 +235,7 @@ export function BlocksPage() {
               <ul className="space-y-1 text-sm text-muted-foreground">
                 {summary.top_exercises.map((row) => (
                   <li key={row.name}>
-                    {row.name} · {Math.round(row.tonnage)} kg · {row.sets} sets
+                    {row.name} · {formatTonnage(row.tonnage, displayUnit)} · {row.sets} sets
                   </li>
                 ))}
               </ul>

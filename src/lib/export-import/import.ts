@@ -1,4 +1,4 @@
-import { refreshAnalytics } from '@/hooks/useWorkouts'
+import { refreshAnalyticsFullHistory } from '@/hooks/useWorkouts'
 import { supabase } from '@/lib/supabase'
 import type {
   GrowExportExercise,
@@ -78,6 +78,21 @@ async function resolveExerciseId(
     .maybeSingle()
 
   if (existing?.id) {
+    const muscles = backfillMuscles(exercise)
+    const { error: updateError } = await supabase
+      .from('exercises')
+      .update({
+        category: exercise.category,
+        muscle_groups: muscles.muscle_groups,
+        primary_muscle: muscles.primary_muscle,
+        secondary_muscles: muscles.secondary_muscles,
+        other_muscles: muscles.other_muscles,
+        is_compound: exercise.is_compound,
+        is_tracked: exercise.is_tracked,
+      })
+      .eq('id', existing.id)
+
+    if (updateError) throw updateError
     cache.set(key, existing.id)
     return existing.id
   }
@@ -235,5 +250,5 @@ export async function importUserData(
     }
   }
 
-  await refreshAnalytics(userId)
+  await refreshAnalyticsFullHistory(userId)
 }

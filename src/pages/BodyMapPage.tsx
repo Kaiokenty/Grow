@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { MuscleMapExplorer } from '@/components/body-map/MuscleMapExplorer'
+import { useAnalyticsRange } from '@/hooks/useAnalyticsRange'
 import { useAuth } from '@/hooks/useAuth'
 import { useUserSettings } from '@/hooks/useUserSettings'
 import { GROW_MUSCLE_GROUPS, type GrowMuscleGroup } from '@/lib/body-map'
@@ -13,6 +14,7 @@ export function BodyMapPage() {
   const weekStartDay = settings?.week_start_day ?? 1
   const displayUnit = settings?.display_unit ?? 'kg'
   const chartWeeks = settings?.chart_weeks ?? 6
+  const { preset, setPreset, weeks: rangeWeeks } = useAnalyticsRange(chartWeeks)
 
   const initialMuscle = useMemo(() => {
     const param = searchParams.get('muscle')
@@ -40,8 +42,10 @@ export function BodyMapPage() {
           userId={user.id}
           weekStartDay={weekStartDay}
           displayUnit={displayUnit}
+          rangeWeeks={rangeWeeks}
+          analyticsPreset={preset}
+          onAnalyticsPresetChange={setPreset}
           variant="explore"
-          chartWeeks={chartWeeks}
           initialMuscle={initialMuscle}
         />
       )}

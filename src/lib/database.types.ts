@@ -538,7 +538,7 @@ export type Database = {
       end_training_block: { Args: { p_block_id: string }; Returns: undefined }
       get_block_summary: { Args: { p_block_id: string }; Returns: Json }
       get_dashboard_muscle_heatmap: {
-        Args: { p_week_start_day?: number }
+        Args: { p_week_start_day?: number; p_weeks?: number }
         Returns: Json
       }
       get_dashboard_summary: {
@@ -551,7 +551,11 @@ export type Database = {
         Returns: Json
       }
       get_muscle_week_stats: {
-        Args: { p_muscle: string; p_week_start_day?: number }
+        Args: {
+          p_muscle: string
+          p_week_start_day?: number
+          p_weeks?: number
+        }
         Returns: Json
       }
       get_training_blocks: { Args: never; Returns: Json }
@@ -575,7 +579,15 @@ export type Database = {
         }[]
       }
       refresh_analytics_for_user: {
+        Args: { p_user_id: string; p_workout_date?: string | null }
+        Returns: undefined
+      }
+      refresh_analytics_full_history: {
         Args: { p_user_id: string }
+        Returns: undefined
+      }
+      refresh_analytics_for_weeks: {
+        Args: { p_user_id: string; p_week_starts: string[] }
         Returns: undefined
       }
       start_training_block: {

@@ -34,8 +34,19 @@ export type SaveWorkoutInput = {
   displayUnit: DisplayUnit
 }
 
-export async function refreshAnalytics(userId: string) {
+export async function refreshAnalytics(
+  userId: string,
+  options?: { workoutDate?: string },
+) {
   const { error } = await supabase.rpc('refresh_analytics_for_user', {
+    p_user_id: userId,
+    p_workout_date: options?.workoutDate ?? null,
+  })
+  if (error) throw error
+}
+
+export async function refreshAnalyticsFullHistory(userId: string) {
+  const { error } = await supabase.rpc('refresh_analytics_full_history', {
     p_user_id: userId,
   })
   if (error) throw error
@@ -186,7 +197,7 @@ async function saveWorkoutToDb({ userId, draft, displayUnit }: SaveWorkoutInput)
     if (insertError) throw insertError
   }
 
-  await refreshAnalytics(userId)
+  await refreshAnalytics(userId, { workoutDate: draft.date })
 
   return workoutId!
 }

@@ -82,7 +82,12 @@ export function DashboardPage() {
           )}
 
           {user?.id && (
-            <DashboardCharts userId={user.id} chartWeeks={chartWeeks} />
+            <DashboardCharts
+              userId={user.id}
+              chartWeeks={chartWeeks}
+              weekStartDay={weekStartDay}
+              displayUnit={displayUnit}
+            />
           )}
         </>
       )}

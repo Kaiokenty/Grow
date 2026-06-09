@@ -18,12 +18,13 @@ import type { GrowMuscleGroup } from '@/lib/body-map'
 export function useMuscleHeatmap(
   userId: string | undefined,
   weekStartDay: number,
+  rangeWeeks = 1,
   enabled = true,
 ) {
   return useQuery({
-    queryKey: muscleHeatmapQueryKey(userId ?? '', weekStartDay),
+    queryKey: muscleHeatmapQueryKey(userId ?? '', weekStartDay, rangeWeeks),
     enabled: Boolean(userId) && enabled,
-    queryFn: () => fetchMuscleHeatmap(weekStartDay),
+    queryFn: () => fetchMuscleHeatmap(weekStartDay, rangeWeeks),
   })
 }
 
@@ -31,15 +32,17 @@ export function useMuscleWeekStats(
   userId: string | undefined,
   muscle: GrowMuscleGroup | null,
   weekStartDay: number,
+  rangeWeeks = 1,
 ) {
   return useQuery({
     queryKey: muscleWeekStatsQueryKey(
       userId ?? '',
       muscle ?? '',
       weekStartDay,
+      rangeWeeks,
     ),
     enabled: Boolean(userId) && Boolean(muscle),
-    queryFn: () => fetchMuscleWeekStats(muscle!, weekStartDay),
+    queryFn: () => fetchMuscleWeekStats(muscle!, weekStartDay, rangeWeeks),
   })
 }
 

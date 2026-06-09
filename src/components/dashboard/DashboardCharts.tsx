@@ -23,19 +23,36 @@ import {
   useFatigueSummary,
   useWeeklyVolumeHistory,
 } from '@/hooks/useMuscleAnalytics'
+import {
+  weekRangeAllTime,
+  weekRangeForPreset,
+  zeroFillWeekSeries,
+} from '@/lib/analytics/week-series'
+import { formatWeekLabel, formatWorkoutDateShort } from '@/lib/dates'
+import { formatE1rmValue, formatTonnageValue, type DisplayUnit } from '@/lib/units'
 
 type DashboardChartsProps = {
   userId: string
   chartWeeks: number
+  weekStartDay: number
+  displayUnit: DisplayUnit
+  allTime?: boolean
 }
 
-export function DashboardCharts({ userId, chartWeeks }: DashboardChartsProps) {
+export function DashboardCharts({
+  userId,
+  chartWeeks,
+  weekStartDay,
+  displayUnit,
+  allTime = false,
+}: DashboardChartsProps) {
   const [volumeMetric, setVolumeMetric] = useState<'tonnage' | 'sets'>('tonnage')
   const [volumeScope, setVolumeScope] = useState<'total' | 'compound'>('total')
+  const historyWeeks = allTime ? 0 : chartWeeks
   const { data: weeklyVolume = [], isLoading: volumeLoading } =
-    useWeeklyVolumeHistory(userId, chartWeeks)
+    useWeeklyVolumeHistory(userId, historyWeeks)
   const { data: exercisePerf = [], isLoading: perfLoading } =
-    useExercisePerformanceHistory(userId, chartWeeks)
+    useExercisePerformanceHistory(userId, allTime ? 200 : chartWeeks)
   const { data: fatigue } = useFatigueSummary(userId)
 
   const stalledNames = useMemo(
@@ -43,16 +60,32 @@ export function DashboardCharts({ userId, chartWeeks }: DashboardChartsProps) {
     [fatigue?.stalled_exercises],
   )
 
-  const volumeChartData = useMemo(
-    () =>
+  const volumeChartData = useMemo(() => {
+    const range = allTime
+      ? weekRangeAllTime(weeklyVolume[0]?.week_start, weekStartDay)
+      : weekRangeForPreset(chartWeeks, weekStartDay)
+    const filled = zeroFillWeekSeries(
       weeklyVolume.map((row) => ({
-        week: row.week_start.slice(5),
+        week_start: row.week_start,
         tonnage: Number(row.tonnage),
         sets: row.total_sets,
         compound: Number(row.compound_volume),
+        avg_rpe: row.avg_rpe != null ? Number(row.avg_rpe) : null,
       })),
-    [weeklyVolume],
-  )
+      range.start,
+      range.end,
+      weekStartDay,
+      { tonnage: 0, sets: 0, compound: 0, avg_rpe: null as number | null },
+    )
+    return filled.map((row) => ({
+      week: formatWorkoutDateShort(row.week_start),
+      weekStart: row.week_start,
+      tonnage: formatTonnageValue(row.tonnage, displayUnit),
+      sets: row.sets,
+      compound: formatTonnageValue(row.compound, displayUnit),
+      avg_rpe: row.avg_rpe,
+    }))
+  }, [allTime, chartWeeks, displayUnit, weekStartDay, weeklyVolume])
 
   const liftChartData = useMemo(() => {
     const tracked = exercisePerf.filter(
@@ -63,7 +96,10 @@ export function DashboardCharts({ userId, chartWeeks }: DashboardChartsProps) {
         (row.exercises as { is_tracked: boolean }).is_tracked &&
         row.e1rm != null,
     )
-    const byExercise = new Map<string, { name: string; points: { week: string; e1rm: number }[] }>()
+    const byExercise = new Map<
+      string,
+      { name: string; points: { week: string; weekStart: string; e1rm: number }[] }
+    >()
     for (const row of tracked) {
       const name =
         row.exercises && typeof row.exercises === 'object' && 'name' in row.exercises
@@ -73,12 +109,32 @@ export function DashboardCharts({ userId, chartWeeks }: DashboardChartsProps) {
         byExercise.set(row.exercise_id, { name, points: [] })
       }
       byExercise.get(row.exercise_id)!.points.push({
-        week: row.week_start.slice(5),
-        e1rm: Number(row.e1rm),
+        week: formatWorkoutDateShort(row.week_start),
+        weekStart: row.week_start,
+        e1rm: formatE1rmValue(Number(row.e1rm), displayUnit),
       })
     }
-    return [...byExercise.values()].slice(0, 4)
-  }, [exercisePerf])
+    return [...byExercise.values()]
+      .map((lift) => ({
+        ...lift,
+        points: [...lift.points].sort((a, b) =>
+          a.weekStart.localeCompare(b.weekStart),
+        ),
+      }))
+      .slice(0, 4)
+  }, [displayUnit, exercisePerf])
+
+  const hasTrackedLifts = useMemo(
+    () =>
+      exercisePerf.some(
+        (row) =>
+          row.exercises &&
+          typeof row.exercises === 'object' &&
+          'is_tracked' in row.exercises &&
+          (row.exercises as { is_tracked: boolean }).is_tracked,
+      ),
+    [exercisePerf],
+  )
 
   const stalledLiftNames = useMemo(
     () => liftChartData.filter((lift) => stalledNames.has(lift.name)).map((l) => l.name),
@@ -90,13 +146,13 @@ export function DashboardCharts({ userId, chartWeeks }: DashboardChartsProps) {
 
   const rpeChartData = useMemo(
     () =>
-      weeklyVolume
+      volumeChartData
         .filter((row) => row.avg_rpe != null)
         .map((row) => ({
-          week: row.week_start.slice(5),
+          week: row.week,
           rpe: Number(row.avg_rpe),
         })),
-    [weeklyVolume],
+    [volumeChartData],
   )
 
   return (
@@ -160,8 +216,15 @@ export function DashboardCharts({ userId, chartWeeks }: DashboardChartsProps) {
                 <BarChart data={volumeChartData}>
                   <CartesianGrid strokeDasharray="3 3" className="stroke-border/60" />
                   <XAxis dataKey="week" tick={{ fontSize: 11 }} />
-                  <YAxis tick={{ fontSize: 11 }} width={48} />
-                  <Tooltip />
+                  <YAxis tick={{ fontSize: 11 }} width={48} unit={displayUnit} />
+                  <Tooltip
+                    labelFormatter={(_, payload) => {
+                      const weekStart = payload?.[0]?.payload?.weekStart as
+                        | string
+                        | undefined
+                      return weekStart ? formatWeekLabel(weekStart) : ''
+                    }}
+                  />
                   <Bar
                     dataKey={volumeBarKey}
                     fill="var(--accent)"
@@ -191,7 +254,9 @@ export function DashboardCharts({ userId, chartWeeks }: DashboardChartsProps) {
             <div className="h-40 animate-pulse rounded-lg bg-muted" />
           ) : liftChartData.length === 0 ? (
             <p className="text-sm text-muted-foreground">
-              Mark exercises as tracked to see e1RM trends.
+              {hasTrackedLifts
+                ? 'No e1RM history yet — log working sets (≤10 reps) or re-import workouts.'
+                : 'Mark exercises as tracked to see e1RM trends.'}
             </p>
           ) : (
             <div className="space-y-4">
@@ -202,14 +267,21 @@ export function DashboardCharts({ userId, chartWeeks }: DashboardChartsProps) {
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={lift.points}>
                         <XAxis dataKey="week" tick={{ fontSize: 10 }} />
-                        <YAxis tick={{ fontSize: 10 }} width={36} />
-                        <Tooltip />
+                        <YAxis tick={{ fontSize: 10 }} width={36} unit={displayUnit} />
+                        <Tooltip
+                          labelFormatter={(_, payload) => {
+                            const weekStart = payload?.[0]?.payload?.weekStart as
+                              | string
+                              | undefined
+                            return weekStart ? formatWeekLabel(weekStart) : ''
+                          }}
+                        />
                         <Line
                           type="monotone"
                           dataKey="e1rm"
                           stroke="var(--accent)"
                           strokeWidth={2}
-                          dot={false}
+                          dot={lift.points.length < 2}
                         />
                       </LineChart>
                     </ResponsiveContainer>

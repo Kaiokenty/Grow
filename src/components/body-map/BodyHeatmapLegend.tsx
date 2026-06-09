@@ -1,11 +1,11 @@
 import { HEAT_COLORS } from '@/components/body-map/heat-colors'
 
-const LABELS = ['Low', 'Moderate', 'High', 'Peak'] as const
+const LABELS = ['Below MEV', 'Approaching', 'In range', 'Above MRV'] as const
 
 export function BodyHeatmapLegend() {
   return (
     <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
-      <span className="font-medium text-foreground">Volume</span>
+      <span className="font-medium text-foreground">Weekly sets</span>
       {HEAT_COLORS.map((color, i) => (
         <div key={color} className="flex items-center gap-1.5">
           <span

@@ -20,6 +20,17 @@ export {
 } from '@/lib/body-map/attribution'
 export { volumeToIntensity, maxVolume } from '@/lib/body-map/intensity'
 export {
+  landmarkBand,
+  landmarkBandLabel,
+  DEFAULT_MUSCLE_LANDMARKS,
+} from '@/lib/body-map/landmarks'
+export {
+  computeBalanceSummary,
+  BALANCE_VIEW_LABELS,
+  type BalanceView,
+} from '@/lib/body-map/balance'
+export { muscleSetsToBodyParts } from '@/lib/body-map/landmark-body-parts'
+export {
   MOCK_WEEKLY_VOLUME,
   mockTonnageByMuscle,
   type MuscleVolumeStats,

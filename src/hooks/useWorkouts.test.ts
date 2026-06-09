@@ -90,6 +90,7 @@ describe('useSaveWorkout', () => {
       expect(setsInsertMock).toHaveBeenCalled()
       expect(rpcMock).toHaveBeenCalledWith('refresh_analytics_for_user', {
         p_user_id: 'user-1',
+        p_workout_date: '2026-06-08',
       })
     })
   })
