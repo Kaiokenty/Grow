@@ -1,4 +1,4 @@
-export type Json =
+﻿export type Json =
   | string
   | number
   | boolean
@@ -86,6 +86,9 @@ export type Database = {
           movement_type: Database["public"]["Enums"]["movement_type"]
           muscle_groups: string[]
           name: string
+          other_muscles: string[]
+          primary_muscle: string
+          secondary_muscles: string[]
         }
         Insert: {
           category?: string | null
@@ -95,6 +98,9 @@ export type Database = {
           movement_type: Database["public"]["Enums"]["movement_type"]
           muscle_groups?: string[]
           name: string
+          other_muscles?: string[]
+          primary_muscle: string
+          secondary_muscles?: string[]
         }
         Update: {
           category?: string | null
@@ -104,6 +110,9 @@ export type Database = {
           movement_type?: Database["public"]["Enums"]["movement_type"]
           muscle_groups?: string[]
           name?: string
+          other_muscles?: string[]
+          primary_muscle?: string
+          secondary_muscles?: string[]
         }
         Relationships: []
       }
@@ -118,6 +127,9 @@ export type Database = {
           movement_type: Database["public"]["Enums"]["movement_type"]
           muscle_groups: string[]
           name: string
+          other_muscles: string[]
+          primary_muscle: string
+          secondary_muscles: string[]
           updated_at: string
           user_id: string
         }
@@ -131,6 +143,9 @@ export type Database = {
           movement_type: Database["public"]["Enums"]["movement_type"]
           muscle_groups?: string[]
           name: string
+          other_muscles?: string[]
+          primary_muscle: string
+          secondary_muscles?: string[]
           updated_at?: string
           user_id: string
         }
@@ -144,6 +159,9 @@ export type Database = {
           movement_type?: Database["public"]["Enums"]["movement_type"]
           muscle_groups?: string[]
           name?: string
+          other_muscles?: string[]
+          primary_muscle?: string
+          secondary_muscles?: string[]
           updated_at?: string
           user_id?: string
         }
@@ -160,6 +178,7 @@ export type Database = {
           performance_drop_detected: boolean
           rolling_7d_avg_rpe: number | null
           rpe_trend: number | null
+          stalled_exercises: string[]
           user_id: string
         }
         Insert: {
@@ -172,6 +191,7 @@ export type Database = {
           performance_drop_detected?: boolean
           rolling_7d_avg_rpe?: number | null
           rpe_trend?: number | null
+          stalled_exercises?: string[]
           user_id: string
         }
         Update: {
@@ -184,7 +204,35 @@ export type Database = {
           performance_drop_detected?: boolean
           rolling_7d_avg_rpe?: number | null
           rpe_trend?: number | null
+          stalled_exercises?: string[]
           user_id?: string
+        }
+        Relationships: []
+      }
+      muscle_weekly_volume: {
+        Row: {
+          avg_rpe: number | null
+          muscle: string
+          sets: number
+          user_id: string
+          week_start: string
+          weighted_tonnage_kg: number
+        }
+        Insert: {
+          avg_rpe?: number | null
+          muscle: string
+          sets?: number
+          user_id: string
+          week_start: string
+          weighted_tonnage_kg?: number
+        }
+        Update: {
+          avg_rpe?: number | null
+          muscle?: string
+          sets?: number
+          user_id?: string
+          week_start?: string
+          weighted_tonnage_kg?: number
         }
         Relationships: []
       }
@@ -367,6 +415,8 @@ export type Database = {
           chart_weeks: number
           created_at: string
           display_unit: Database["public"]["Enums"]["display_unit"]
+          rest_timer_enabled: boolean
+          rest_timer_seconds: number
           updated_at: string
           user_id: string
           week_start_day: number
@@ -375,6 +425,8 @@ export type Database = {
           chart_weeks?: number
           created_at?: string
           display_unit?: Database["public"]["Enums"]["display_unit"]
+          rest_timer_enabled?: boolean
+          rest_timer_seconds?: number
           updated_at?: string
           user_id: string
           week_start_day?: number
@@ -383,6 +435,8 @@ export type Database = {
           chart_weeks?: number
           created_at?: string
           display_unit?: Database["public"]["Enums"]["display_unit"]
+          rest_timer_enabled?: boolean
+          rest_timer_seconds?: number
           updated_at?: string
           user_id?: string
           week_start_day?: number
@@ -465,27 +519,72 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      backfill_muscle_attribution_from_groups: {
+        Args: { groups: string[] }
+        Returns: {
+          other_muscles: string[]
+          primary_muscle: string
+          secondary_muscles: string[]
+        }[]
+      }
+      calc_e1rm_simple: {
+        Args: { p_reps: number; p_weight_kg: number }
+        Returns: number
+      }
+      compare_training_blocks: {
+        Args: { p_block_a: string; p_block_b: string }
+        Returns: Json
+      }
+      end_training_block: { Args: { p_block_id: string }; Returns: undefined }
+      get_block_summary: { Args: { p_block_id: string }; Returns: Json }
+      get_dashboard_muscle_heatmap: {
+        Args: { p_week_start_day?: number }
+        Returns: Json
+      }
       get_dashboard_summary: {
         Args: { p_week_start_day?: number }
         Returns: Json
       }
+      get_fatigue_summary: { Args: never; Returns: Json }
+      get_muscle_volume_history: {
+        Args: { p_muscle: string; p_weeks?: number }
+        Returns: Json
+      }
+      get_muscle_week_stats: {
+        Args: { p_muscle: string; p_week_start_day?: number }
+        Returns: Json
+      }
+      get_training_blocks: { Args: never; Returns: Json }
+      get_weekly_summary_nlg: {
+        Args: { p_week_start_day?: number }
+        Returns: Json
+      }
+      is_valid_grow_muscle: { Args: { m: string }; Returns: boolean }
       list_workouts: {
         Args: { p_limit?: number; p_offset?: number }
         Returns: {
-          id: string
-          user_id: string
-          date: string
-          duration_minutes: number | null
-          notes: string | null
-          program_id: string | null
           created_at: string
-          updated_at: string
+          date: string
+          duration_minutes: number
           exercise_count: number
+          id: string
+          notes: string
+          program_id: string
+          updated_at: string
+          user_id: string
         }[]
       }
       refresh_analytics_for_user: {
         Args: { p_user_id: string }
         Returns: undefined
+      }
+      start_training_block: {
+        Args: { p_name: string; p_notes?: string; p_start_date?: string }
+        Returns: string
+      }
+      week_start_for: {
+        Args: { p_date: string; p_week_start_day: number }
+        Returns: string
       }
     }
     Enums: {

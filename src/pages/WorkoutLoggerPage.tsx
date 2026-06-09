@@ -22,7 +22,7 @@ import {
   useWorkoutSets,
   workoutSetsToSessionExercises,
 } from '@/hooks/useWorkouts'
-import { lastSessionToInitialSet } from '@/lib/workout/autofill'
+import { formatLastSessionLabel, lastSessionToInitialSet } from '@/lib/workout/autofill'
 import { cn } from '@/lib/utils'
 import { useWorkoutStore } from '@/stores/workout'
 
@@ -57,6 +57,12 @@ export function WorkoutLoggerPage() {
 
   const saveWorkout = useSaveWorkout(user?.id)
   const [saveError, setSaveError] = useState<string | null>(null)
+  const [restRemaining, setRestRemaining] = useState<number | null>(null)
+  const [lastSessionLabels, setLastSessionLabels] = useState<
+    Record<string, string>
+  >({})
+  const restEnabled = settings?.rest_timer_enabled ?? false
+  const restSeconds = settings?.rest_timer_seconds ?? 90
   const initializedRef = useRef(false)
   const programLoadedRef = useRef(false)
 
@@ -154,6 +160,11 @@ export function WorkoutLoggerPage() {
       const exerciseIds = programExercises.map((row) => row.exercise_id)
       try {
         const lastSets = await fetchLastSessionSetsBatch(user.id, exerciseIds)
+        const labels: Record<string, string> = {}
+        for (const [exerciseId, last] of lastSets) {
+          labels[exerciseId] = formatLastSessionLabel(last, displayUnit)
+        }
+        setLastSessionLabels((prev) => ({ ...prev, ...labels }))
         useWorkoutStore.getState().addExercisesBatch(
           exerciseIds.map((exerciseId) => {
             const last = lastSets.get(exerciseId)
@@ -185,6 +196,12 @@ export function WorkoutLoggerPage() {
         exerciseId,
         last ? lastSessionToInitialSet(last, displayUnit) : undefined,
       )
+      if (last) {
+        setLastSessionLabels((prev) => ({
+          ...prev,
+          [exerciseId]: formatLastSessionLabel(last, displayUnit),
+        }))
+      }
     },
     [displayUnit, editId, isEdit, user?.id],
   )
@@ -199,13 +216,17 @@ export function WorkoutLoggerPage() {
     }
 
     try {
-      await saveWorkout.mutateAsync({
+      const workoutId = await saveWorkout.mutateAsync({
         draft: store.getDraft(),
         displayUnit,
       })
       store.clearDraft()
       store.reset()
-      navigate('/workouts')
+      if (isEdit) {
+        navigate('/workouts')
+      } else {
+        navigate(`/workouts/${workoutId}/summary`)
+      }
     } catch (error) {
       setSaveError(
         error instanceof Error
@@ -232,6 +253,28 @@ export function WorkoutLoggerPage() {
 
   const clearFieldValidation = () => {
     useWorkoutStore.getState().clearValidation()
+  }
+
+  useEffect(() => {
+    if (restRemaining == null || restRemaining <= 0) return
+    const id = window.setInterval(() => {
+      setRestRemaining((prev) => {
+        if (prev == null || prev <= 1) return null
+        return prev - 1
+      })
+    }, 1000)
+    return () => window.clearInterval(id)
+  }, [restRemaining])
+
+  const startRestTimer = useCallback(() => {
+    if (!restEnabled) return
+    setRestRemaining(restSeconds)
+  }, [restEnabled, restSeconds])
+
+  const formatRest = (seconds: number) => {
+    const mins = Math.floor(seconds / 60)
+    const secs = seconds % 60
+    return `${mins}:${String(secs).padStart(2, '0')}`
   }
 
   return (
@@ -321,7 +364,12 @@ export function WorkoutLoggerPage() {
             }
           />
         ) : (
-          <WorkoutExerciseList exerciseMap={exerciseMap} displayUnit={displayUnit} />
+          <WorkoutExerciseList
+            exerciseMap={exerciseMap}
+            displayUnit={displayUnit}
+            lastSessionLabels={lastSessionLabels}
+            onWorkingSetComplete={startRestTimer}
+          />
         )}
 
         {exerciseCount > 0 && (
@@ -353,9 +401,27 @@ export function WorkoutLoggerPage() {
 
       <div className="fixed inset-x-0 bottom-0 z-30 border-t border-border/60 bg-background/80 backdrop-blur-sm">
         <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 py-3">
-          <p className="text-xs text-muted-foreground">
-            {isDirty && exerciseCount > 0 ? 'Unsaved changes · draft autosaved' : '\u00a0'}
-          </p>
+          {restRemaining != null && restRemaining > 0 ? (
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-medium tabular-nums">
+                Rest {formatRest(restRemaining)}
+              </span>
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={() => setRestRemaining((prev) => (prev != null ? prev + 30 : null))}
+              >
+                +30s
+              </Button>
+              <Button size="sm" variant="ghost" onClick={() => setRestRemaining(null)}>
+                Skip
+              </Button>
+            </div>
+          ) : (
+            <p className="text-xs text-muted-foreground">
+              {isDirty && exerciseCount > 0 ? 'Unsaved changes · draft autosaved' : '\u00a0'}
+            </p>
+          )}
           <div className="flex gap-2">
             <Button variant="secondary" size="sm" onClick={handleDiscard}>
               Discard

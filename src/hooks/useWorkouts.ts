@@ -34,6 +34,13 @@ export type SaveWorkoutInput = {
   displayUnit: DisplayUnit
 }
 
+export async function refreshAnalytics(userId: string) {
+  const { error } = await supabase.rpc('refresh_analytics_for_user', {
+    p_user_id: userId,
+  })
+  if (error) throw error
+}
+
 export function useWorkouts(userId: string | undefined) {
   return useInfiniteQuery({
     queryKey: workoutsQueryKey(userId ?? ''),
@@ -179,6 +186,8 @@ async function saveWorkoutToDb({ userId, draft, displayUnit }: SaveWorkoutInput)
     if (insertError) throw insertError
   }
 
+  await refreshAnalytics(userId)
+
   return workoutId!
 }
 
@@ -199,6 +208,18 @@ export function useSaveWorkout(userId: string | undefined) {
       void queryClient.invalidateQueries({
         queryKey: ['weeklySummary', userId],
       })
+      void queryClient.invalidateQueries({
+        queryKey: ['muscleHeatmap', userId],
+      })
+      void queryClient.invalidateQueries({
+        queryKey: ['fatigueSummary', userId],
+      })
+      void queryClient.invalidateQueries({
+        queryKey: ['weeklyNlg', userId],
+      })
+      void queryClient.invalidateQueries({
+        queryKey: ['weeklyVolumeHistory', userId],
+      })
     },
   })
 }
@@ -208,12 +229,16 @@ export function useDeleteWorkout(userId: string | undefined) {
 
   return useMutation({
     mutationFn: async (workoutId: string) => {
+      if (!userId) throw new Error('Not signed in')
+
       const { error } = await supabase
         .from('workouts')
         .delete()
         .eq('id', workoutId)
 
       if (error) throw error
+
+      await refreshAnalytics(userId)
     },
     onSuccess: () => {
       if (!userId) return
@@ -223,6 +248,18 @@ export function useDeleteWorkout(userId: string | undefined) {
       })
       void queryClient.invalidateQueries({
         queryKey: ['weeklySummary', userId],
+      })
+      void queryClient.invalidateQueries({
+        queryKey: ['muscleHeatmap', userId],
+      })
+      void queryClient.invalidateQueries({
+        queryKey: ['fatigueSummary', userId],
+      })
+      void queryClient.invalidateQueries({
+        queryKey: ['weeklyNlg', userId],
+      })
+      void queryClient.invalidateQueries({
+        queryKey: ['weeklyVolumeHistory', userId],
       })
     },
   })

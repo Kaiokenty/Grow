@@ -14,3 +14,12 @@ export function lastSessionToInitialSet(
     setType: last.set_type,
   }
 }
+
+export function formatLastSessionLabel(
+  last: LastSessionSet,
+  displayUnit: DisplayUnit,
+): string {
+  const weight = kgToDisplayWeight(last.weight_kg, displayUnit)
+  const rpe = last.rpe != null ? ` @ ${last.rpe}` : ''
+  return `${weight}${displayUnit} × ${last.reps}${rpe}`
+}

@@ -1,0 +1,126 @@
+{
+  "grow_version": 1,
+  "exported_at": "2026-06-08T12:00:00.000Z",
+  "display_unit_hint": "kg",
+  "exercises": [
+    {
+      "name": "Bench Press",
+      "movement_type": "upper_push",
+      "category": "chest",
+      "muscle_groups": ["chest", "triceps", "shoulders"],
+      "primary_muscle": "chest",
+      "secondary_muscles": ["triceps", "shoulders"],
+      "other_muscles": [],
+      "is_compound": true,
+      "is_tracked": true
+    },
+    {
+      "name": "Squat",
+      "movement_type": "lower_compound",
+      "category": "legs",
+      "muscle_groups": ["quads", "glutes"],
+      "primary_muscle": "quads",
+      "secondary_muscles": ["glutes"],
+      "other_muscles": [],
+      "is_compound": true,
+      "is_tracked": true
+    },
+    {
+      "name": "Barbell Row",
+      "movement_type": "upper_pull",
+      "category": "back",
+      "muscle_groups": ["back", "biceps"],
+      "primary_muscle": "back",
+      "secondary_muscles": ["biceps"],
+      "other_muscles": [],
+      "is_compound": true,
+      "is_tracked": true
+    },
+    {
+      "name": "Lateral Raise",
+      "movement_type": "isolation",
+      "category": "shoulders",
+      "muscle_groups": ["shoulders"],
+      "primary_muscle": "shoulders",
+      "secondary_muscles": [],
+      "other_muscles": [],
+      "is_compound": false,
+      "is_tracked": false
+    }
+  ],
+  "workouts": [
+    {
+      "date": "2026-05-12",
+      "duration_minutes": 65,
+      "notes": "Week 1 push",
+      "sets": [
+        { "exercise_key": { "name": "Bench Press", "movement_type": "upper_push" }, "set_number": 1, "set_type": "working", "reps": 5, "weight_kg": 100, "rpe": 7.5, "notes": null },
+        { "exercise_key": { "name": "Bench Press", "movement_type": "upper_push" }, "set_number": 2, "set_type": "working", "reps": 5, "weight_kg": 100, "rpe": 8, "notes": null },
+        { "exercise_key": { "name": "Lateral Raise", "movement_type": "isolation" }, "set_number": 1, "set_type": "working", "reps": 12, "weight_kg": 10, "rpe": 7, "notes": null }
+      ]
+    },
+    {
+      "date": "2026-05-14",
+      "duration_minutes": 70,
+      "notes": "Week 1 legs",
+      "sets": [
+        { "exercise_key": { "name": "Squat", "movement_type": "lower_compound" }, "set_number": 1, "set_type": "working", "reps": 5, "weight_kg": 140, "rpe": 8, "notes": null },
+        { "exercise_key": { "name": "Squat", "movement_type": "lower_compound" }, "set_number": 2, "set_type": "working", "reps": 5, "weight_kg": 140, "rpe": 8.5, "notes": null }
+      ]
+    },
+    {
+      "date": "2026-05-19",
+      "duration_minutes": 60,
+      "notes": "Week 2 push",
+      "sets": [
+        { "exercise_key": { "name": "Bench Press", "movement_type": "upper_push" }, "set_number": 1, "set_type": "working", "reps": 5, "weight_kg": 100, "rpe": 8, "notes": null },
+        { "exercise_key": { "name": "Bench Press", "movement_type": "upper_push" }, "set_number": 2, "set_type": "working", "reps": 5, "weight_kg": 100, "rpe": 8, "notes": null }
+      ]
+    },
+    {
+      "date": "2026-05-21",
+      "duration_minutes": 68,
+      "notes": "Week 2 legs — squat easing",
+      "sets": [
+        { "exercise_key": { "name": "Squat", "movement_type": "lower_compound" }, "set_number": 1, "set_type": "working", "reps": 5, "weight_kg": 137.5, "rpe": 8.5, "notes": null },
+        { "exercise_key": { "name": "Squat", "movement_type": "lower_compound" }, "set_number": 2, "set_type": "working", "reps": 5, "weight_kg": 135, "rpe": 9, "notes": null }
+      ]
+    },
+    {
+      "date": "2026-05-26",
+      "duration_minutes": 62,
+      "notes": "Week 3 push — bench stall",
+      "sets": [
+        { "exercise_key": { "name": "Bench Press", "movement_type": "upper_push" }, "set_number": 1, "set_type": "working", "reps": 5, "weight_kg": 100, "rpe": 8.5, "notes": null },
+        { "exercise_key": { "name": "Barbell Row", "movement_type": "upper_pull" }, "set_number": 1, "set_type": "working", "reps": 8, "weight_kg": 80, "rpe": 8, "notes": null }
+      ]
+    },
+    {
+      "date": "2026-05-28",
+      "duration_minutes": 70,
+      "notes": "Week 3 legs — performance drop",
+      "sets": [
+        { "exercise_key": { "name": "Squat", "movement_type": "lower_compound" }, "set_number": 1, "set_type": "working", "reps": 5, "weight_kg": 132.5, "rpe": 9, "notes": null },
+        { "exercise_key": { "name": "Squat", "movement_type": "lower_compound" }, "set_number": 2, "set_type": "working", "reps": 5, "weight_kg": 130, "rpe": 9.5, "notes": null }
+      ]
+    },
+    {
+      "date": "2026-06-02",
+      "duration_minutes": 64,
+      "notes": "Week 4 push — high RPE",
+      "sets": [
+        { "exercise_key": { "name": "Bench Press", "movement_type": "upper_push" }, "set_number": 1, "set_type": "working", "reps": 5, "weight_kg": 100, "rpe": 9, "notes": null },
+        { "exercise_key": { "name": "Bench Press", "movement_type": "upper_push" }, "set_number": 2, "set_type": "working", "reps": 5, "weight_kg": 97.5, "rpe": 9, "notes": null }
+      ]
+    },
+    {
+      "date": "2026-06-04",
+      "duration_minutes": 72,
+      "notes": "Week 4 legs — continued drop",
+      "sets": [
+        { "exercise_key": { "name": "Squat", "movement_type": "lower_compound" }, "set_number": 1, "set_type": "working", "reps": 5, "weight_kg": 127.5, "rpe": 9, "notes": null },
+        { "exercise_key": { "name": "Squat", "movement_type": "lower_compound" }, "set_number": 2, "set_type": "working", "reps": 5, "weight_kg": 125, "rpe": 9.5, "notes": null }
+      ]
+    }
+  ]
+}

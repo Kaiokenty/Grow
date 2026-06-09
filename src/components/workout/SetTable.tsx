@@ -1,3 +1,4 @@
+import { Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { RpeInput } from '@/components/workout/RpeInput'
@@ -14,6 +15,7 @@ type SetTableProps = {
   onUpdateSet: (setClientId: string, patch: Partial<SetRow>) => void
   onRemoveSet: (setClientId: string) => void
   onAddSet: () => void
+  onCompleteSet?: (setClientId: string) => void
 }
 
 export function SetTable({
@@ -24,40 +26,61 @@ export function SetTable({
   onUpdateSet,
   onRemoveSet,
   onAddSet,
+  onCompleteSet,
 }: SetTableProps) {
   return (
     <div className="space-y-2">
-      <div className="hidden grid-cols-[2.5rem_5.5rem_1fr_1fr_7.5rem_2rem] gap-2 px-1 text-xs text-muted-foreground sm:grid">
+      <div className="hidden grid-cols-[2.5rem_4.5rem_1fr_1fr_7.5rem_2.5rem_2rem] gap-2 px-1 text-xs text-muted-foreground sm:grid">
         <span>Set</span>
         <span>Type</span>
         <span>Weight ({displayUnit})</span>
         <span>Reps</span>
         <span>RPE</span>
         <span />
+        <span />
       </div>
       {sets.map((set) => {
         const errors = validationErrors[setErrorKey(exerciseClientId, set.clientId)]
+        const isWarmup = set.setType === 'warmup'
 
         return (
           <div
             key={set.clientId}
-            className="grid grid-cols-1 gap-2 rounded-lg border border-border/60 p-2 sm:grid-cols-[2.5rem_5.5rem_1fr_1fr_7.5rem_2rem] sm:items-start sm:border-0 sm:p-0"
+            className={cn(
+              'grid grid-cols-1 gap-2 rounded-lg border p-2 sm:grid-cols-[2.5rem_4.5rem_1fr_1fr_7.5rem_2.5rem_2rem] sm:items-start sm:border-0 sm:p-0',
+              set.completed && 'border-accent/40 bg-accent/5 sm:border-0 sm:bg-transparent',
+              isWarmup && !set.completed && 'border-dashed border-border/60',
+            )}
           >
             <span className="text-sm font-medium tabular-nums text-muted-foreground sm:pt-2 sm:text-center">
               {set.setNumber}
             </span>
-            <select
-              value={set.setType}
-              onChange={(e) =>
-                onUpdateSet(set.clientId, {
-                  setType: e.target.value as SetRow['setType'],
-                })
-              }
-              className="h-8 rounded-lg border border-input bg-transparent px-2 text-sm outline-none focus-visible:border-ring sm:mt-0"
-            >
-              <option value="working">Working</option>
-              <option value="warmup">Warmup</option>
-            </select>
+            <div className="flex gap-1 sm:pt-1">
+              <button
+                type="button"
+                onClick={() => onUpdateSet(set.clientId, { setType: 'warmup' })}
+                className={cn(
+                  'rounded-full px-2 py-0.5 text-[11px] font-medium transition-colors',
+                  isWarmup
+                    ? 'bg-muted text-foreground'
+                    : 'text-muted-foreground hover:bg-muted/60',
+                )}
+              >
+                W
+              </button>
+              <button
+                type="button"
+                onClick={() => onUpdateSet(set.clientId, { setType: 'working' })}
+                className={cn(
+                  'rounded-full px-2 py-0.5 text-[11px] font-medium transition-colors',
+                  !isWarmup
+                    ? 'bg-accent/15 text-accent-foreground'
+                    : 'text-muted-foreground hover:bg-muted/60',
+                )}
+              >
+                Work
+              </button>
+            </div>
             <div className="space-y-1">
               <Input
                 type="number"
@@ -102,6 +125,19 @@ export function SetTable({
               invalid={Boolean(errors?.rpe)}
               error={errors?.rpe}
             />
+            <Button
+              type="button"
+              variant={set.completed ? 'primary' : 'tertiary'}
+              size="icon-sm"
+              aria-label={set.completed ? 'Set completed' : 'Complete set'}
+              className={cn(
+                'sm:mt-0.5 transition-transform',
+                set.completed && 'scale-100',
+              )}
+              onClick={() => onCompleteSet?.(set.clientId)}
+            >
+              <Check className={cn('h-3.5 w-3.5', set.completed && 'text-background')} />
+            </Button>
             <Button
               type="button"
               variant="ghost"

@@ -75,7 +75,7 @@ export function WorkoutsPage() {
                 <li key={workout.id}>
                   <button
                     type="button"
-                    onClick={() => navigate(`/workouts/${workout.id}/edit`)}
+                    onClick={() => navigate(`/workouts/${workout.id}`)}
                     className="flex w-full items-center justify-between gap-4 py-3 text-left transition-colors hover:bg-accent/50"
                   >
                     <div>
@@ -90,7 +90,6 @@ export function WorkoutsPage() {
                           : ''}
                       </p>
                     </div>
-                    <span className="text-xs text-muted-foreground">Edit</span>
                   </button>
                 </li>
               ))}
