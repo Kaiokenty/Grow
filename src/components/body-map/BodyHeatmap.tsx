@@ -8,6 +8,7 @@ type BodyHeatmapProps = {
   side?: 'front' | 'back'
   scale?: number
   className?: string
+  selectedSlug?: Slug | null
   onMuscleClick?: (slug: Slug) => void
 }
 
@@ -30,13 +31,22 @@ export function BodyHeatmap({
   side = 'front',
   scale = 1,
   className,
+  selectedSlug,
   onMuscleClick,
 }: BodyHeatmapProps) {
+  const displayData = selectedSlug
+    ? data.map((part) =>
+        part.slug === selectedSlug
+          ? { ...part, intensity: Math.min(4, (part.intensity ?? 1) + 1) }
+          : { ...part, intensity: Math.max(0, (part.intensity ?? 1) - 1) },
+      )
+    : data
+
   return (
     <div className={cn('flex justify-center', className)}>
       <Suspense fallback={<BodyHeatmapFallback />}>
         <LazyBody
-          data={data}
+          data={displayData}
           side={side}
           gender="male"
           scale={scale}

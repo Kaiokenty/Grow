@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { PageHeader } from '@/components/layout/PageHeader'
+import { MuscleAttributionPicker } from '@/components/exercises/MuscleAttributionPicker'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -30,13 +31,21 @@ import {
   MOVEMENT_TYPE_OPTIONS,
   movementTypeLabel,
 } from '@/lib/movement-type'
+import {
+  backfillMuscleAttribution,
+  buildMuscleGroups,
+  formatMuscleAttributionLabel,
+  validateMuscleAttribution,
+  type GrowMuscleGroup,
+  type MuscleAttribution,
+} from '@/lib/body-map'
 import type { MovementType } from '@/lib/workout/types'
 
 type ExerciseFormState = {
   name: string
   movement_type: MovementType
   category: string
-  muscle_groups: string
+  attribution: MuscleAttribution
   is_compound: boolean
   is_tracked: boolean
 }
@@ -45,17 +54,32 @@ const emptyForm = (): ExerciseFormState => ({
   name: '',
   movement_type: 'upper_push',
   category: '',
-  muscle_groups: '',
+  attribution: {
+    primary_muscle: 'chest',
+    secondary_muscles: [],
+    other_muscles: [],
+  },
   is_compound: false,
   is_tracked: false,
 })
 
 function exerciseToForm(exercise: Exercise): ExerciseFormState {
+  const hasAttribution =
+    'primary_muscle' in exercise && exercise.primary_muscle
+
+  const attribution: MuscleAttribution = hasAttribution
+    ? {
+        primary_muscle: exercise.primary_muscle as GrowMuscleGroup,
+        secondary_muscles: (exercise.secondary_muscles ?? []) as GrowMuscleGroup[],
+        other_muscles: (exercise.other_muscles ?? []) as GrowMuscleGroup[],
+      }
+    : backfillMuscleAttribution(exercise.muscle_groups)
+
   return {
     name: exercise.name,
     movement_type: exercise.movement_type,
     category: exercise.category ?? '',
-    muscle_groups: exercise.muscle_groups.join(', '),
+    attribution,
     is_compound: exercise.is_compound,
     is_tracked: exercise.is_tracked,
   }
@@ -97,12 +121,6 @@ export function ExercisesPage() {
     setOpen(true)
   }
 
-  const parseMuscleGroups = (value: string) =>
-    value
-      .split(',')
-      .map((s) => s.trim())
-      .filter(Boolean)
-
   const handleSubmit = async () => {
     setFormError(null)
     if (!form.name.trim()) {
@@ -110,11 +128,20 @@ export function ExercisesPage() {
       return
     }
 
+    const attributionError = validateMuscleAttribution(form.attribution)
+    if (attributionError) {
+      setFormError(attributionError)
+      return
+    }
+
     const payload = {
       name: form.name.trim(),
       movement_type: form.movement_type,
       category: form.category.trim() || null,
-      muscle_groups: parseMuscleGroups(form.muscle_groups),
+      primary_muscle: form.attribution.primary_muscle,
+      secondary_muscles: form.attribution.secondary_muscles,
+      other_muscles: form.attribution.other_muscles,
+      muscle_groups: buildMuscleGroups(form.attribution),
       is_compound: form.is_compound,
       is_tracked: form.is_tracked,
     }
@@ -173,28 +200,33 @@ export function ExercisesPage() {
             />
           )}
           <ul className="divide-y divide-border/60">
-            {filtered.map((exercise) => (
-              <li key={exercise.id}>
-                <button
-                  type="button"
-                  onClick={() => openEdit(exercise)}
-                  className="flex w-full items-start justify-between gap-4 py-3 text-left hover:bg-accent/50"
-                >
-                  <div>
-                    <p className="text-sm font-medium">{exercise.name}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {movementTypeLabel(exercise.movement_type)}
-                      {exercise.muscle_groups.length > 0
-                        ? ` · ${exercise.muscle_groups.join(', ')}`
-                        : ''}
-                    </p>
-                  </div>
-                  {exercise.is_tracked && (
-                    <span className="text-xs text-muted-foreground">Tracked</span>
-                  )}
-                </button>
-              </li>
-            ))}
+            {filtered.map((exercise) => {
+              const label =
+                'primary_muscle' in exercise && exercise.primary_muscle
+                  ? formatMuscleAttributionLabel(exerciseToForm(exercise).attribution)
+                  : exercise.muscle_groups.join(', ')
+
+              return (
+                <li key={exercise.id}>
+                  <button
+                    type="button"
+                    onClick={() => openEdit(exercise)}
+                    className="flex w-full items-start justify-between gap-4 py-3 text-left hover:bg-accent/50"
+                  >
+                    <div>
+                      <p className="text-sm font-medium">{exercise.name}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {movementTypeLabel(exercise.movement_type)}
+                        {label ? ` · ${label}` : ''}
+                      </p>
+                    </div>
+                    {exercise.is_tracked && (
+                      <span className="text-xs text-muted-foreground">Tracked</span>
+                    )}
+                  </button>
+                </li>
+              )
+            })}
           </ul>
         </CardContent>
       </Card>
@@ -243,17 +275,10 @@ export function ExercisesPage() {
                 placeholder="Optional"
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="muscle-groups">Muscle groups</Label>
-              <Input
-                id="muscle-groups"
-                value={form.muscle_groups}
-                onChange={(e) =>
-                  setForm((f) => ({ ...f, muscle_groups: e.target.value }))
-                }
-                placeholder="chest, triceps"
-              />
-            </div>
+            <MuscleAttributionPicker
+              value={form.attribution}
+              onChange={(attribution) => setForm((f) => ({ ...f, attribution }))}
+            />
             <Switch
               label="Compound"
               checked={form.is_compound}

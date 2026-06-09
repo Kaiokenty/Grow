@@ -7,8 +7,10 @@ export const WORKOUTS_PAGE_SIZE = 25
 export type DashboardSummaryRpc = {
   workouts_this_week: number
   weekly_tonnage_kg: number
+  prior_week_tonnage_kg: number
   rolling_7d_avg_rpe: number | null
   total_workouts: number
+  week_start: string
 }
 
 export async function fetchDashboardSummary(

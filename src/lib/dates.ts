@@ -36,3 +36,14 @@ export function toIsoDate(date: Date): string {
   const d = String(date.getDate()).padStart(2, '0')
   return `${y}-${m}-${d}`
 }
+
+const weekLabelFormatter = new Intl.DateTimeFormat(undefined, {
+  month: 'short',
+  day: 'numeric',
+})
+
+export function formatWeekLabel(weekStartIso: string): string {
+  const [y, m, d] = weekStartIso.split('-').map(Number)
+  if (!y || !m || !d) return `Week of ${weekStartIso}`
+  return `Week of ${weekLabelFormatter.format(new Date(y, m - 1, d))}`
+}

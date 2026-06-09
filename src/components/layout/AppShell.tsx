@@ -7,9 +7,9 @@ import { Button } from '@/components/ui/button'
 import { useAuth } from '@/hooks/useAuth'
 import { useUserSettings } from '@/hooks/useUserSettings'
 import { exercisesQueryKey, fetchExercises } from '@/lib/api/exercises'
+import { fetchWeeklySummary } from '@/hooks/useWeeklySummary'
 import {
   dashboardSummaryQueryKey,
-  fetchDashboardSummary,
   fetchWorkoutsPage,
   workoutsQueryKey,
 } from '@/lib/api/workouts'
@@ -22,6 +22,7 @@ const navItems = [
   { label: 'Workouts', to: '/workouts', end: false },
   { label: 'Exercises', to: '/exercises', end: false },
   { label: 'Programs', to: '/programs', end: false },
+  { label: 'Blocks', to: '/blocks', end: false },
   { label: 'Settings', to: '/settings', end: false },
 ] as const
 
@@ -45,7 +46,7 @@ export function AppShell() {
       if (to === '/') {
         void queryClient.prefetchQuery({
           queryKey: dashboardSummaryQueryKey(user.id, weekStartDay),
-          queryFn: () => fetchDashboardSummary(weekStartDay),
+          queryFn: () => fetchWeeklySummary(weekStartDay),
         })
         return
       }

@@ -20,11 +20,15 @@ import { useWorkoutStore } from '@/stores/workout'
 type WorkoutExerciseListProps = {
   exerciseMap: Map<string, Exercise>
   displayUnit: DisplayUnit
+  lastSessionLabels?: Record<string, string>
+  onWorkingSetComplete?: () => void
 }
 
 export const WorkoutExerciseList = memo(function WorkoutExerciseList({
   exerciseMap,
   displayUnit,
+  lastSessionLabels = {},
+  onWorkingSetComplete,
 }: WorkoutExerciseListProps) {
   const exerciseClientIds = useWorkoutStore(
     useShallow((state) => state.exercises.map((exercise) => exercise.clientId)),
@@ -61,6 +65,8 @@ export const WorkoutExerciseList = memo(function WorkoutExerciseList({
               clientId={clientId}
               exerciseMap={exerciseMap}
               displayUnit={displayUnit}
+              lastSessionLabels={lastSessionLabels}
+              onWorkingSetComplete={onWorkingSetComplete}
             />
           ))}
         </div>

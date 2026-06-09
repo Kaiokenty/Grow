@@ -6,11 +6,21 @@
 LOCKED DECISIONS (reference during build)
 ================================================================================
 
-SET LOGGING
+SET LOGGING (Phase 1 baseline; Phase 2.5 extends — see PHASE 2.5)
 - Each set tagged: working | warmup (default: working)
-- Only working sets count toward volume, RPE averages, e1RM, fatigue
-- RPE required on working sets; optional on warmups
-- RPE precision: 0.5 increments (6, 6.5, 7 … 10)
+  - Phase 2.5b adds technique tags on working rows: none | failure | drop | …
+- Only non-warmup sets count toward volume; warmups excluded from analytics
+- Effort on working sets (Phase 2.5):
+  - Encouraged during logging; NOT required before set-complete ✓
+  - Save warns if working sets missing effort; user may save anyway
+  - Warmups: effort always optional
+- Effort metric (Phase 2.5b): global user setting rpe | rir
+  - UI: chip select (no typing) — RPE 6–10 (0.5 steps) or RIR 4+, 3, 2, 1, 0
+  - Store canonical sets.rpe (6–10); RIR→RPE on write: 4+→6, 3→7, 2→8, 1→9, 0→10
+  - Optional sets.effort_rir for display fidelity
+- e1RM best-set selection (Phase 2.5b): technique none | failure | amrap | myo_activation
+  - Exclude drop segments and myo_mini from e1RM
+- Unilateral (Phase 2.5b): exercises.logging_mode + sets.side when per_side
 
 TIME BUCKETS
 - Hybrid model:
@@ -40,6 +50,12 @@ ANCHOR / TRACKED EXERCISES
   and weekly summary callouts (can mark all lifts if desired)
 - Not auto-limited to compounds
 
+MUSCLE ATTRIBUTION (volume analytics)
+- exercises: primary_muscle (required) + secondary_muscles[] (max 2) + other_muscles[] (max 3)
+- Weights: primary 1.0, secondary 0.5, other 0.3 on weighted tonnage only
+- muscle_groups[] synced via DB trigger for search/filter compat
+- Headline weekly volume = raw total (no double-count); per-muscle heatmap = weighted
+
 DELOAD RECOMMENDATION
 - Tiered score 0–100 → lean | moderate | strong deload
 - Inputs (weighted): rolling 7-day avg RPE, RPE trend, performance_drop,
@@ -53,8 +69,10 @@ TRAINING BLOCKS
 
 SESSION & PROGRAMS
 - Freeform workout logging (add exercises ad hoc each session)
-- Stored workout programs (MVP): named ordered exercise list, no prescribed sets
-- Phase 3+: full prescription (sets/reps/RPE targets) + multi-week mesocycles
+- Stored workout programs:
+  - Phase 1: flat ordered exercise list, no prescribed sets
+  - Phase 2.5a: program_days — one program, multiple named days (e.g. PPL), exercises per day
+  - Phase 3+: full prescription (sets/reps/RPE targets) + multi-week mesocycles
 
 ANALYTICS UI
 - Chart time range: user setting (default 6 weeks on first launch)
@@ -150,11 +168,11 @@ Depends on: Phase 0
 Blocks: nothing (Phase 1 can proceed in parallel)
 
 Tasks:
-[ ] Install @mjcdev/react-body-highlighter
-[ ] muscle_groups → SVG slug mapping lib (src/lib/body-map/)
-[ ] BodyHeatmap component + mock volume
-[ ] Dashboard preview card + /body-map playground
-[ ] Unit tests for mapping + intensity bucketing
+[x] Install @mjcdev/react-body-highlighter
+[x] muscle_groups → SVG slug mapping lib (src/lib/body-map/)
+[x] BodyHeatmap component + mock volume
+[x] Dashboard preview card + /body-map playground
+[x] Unit tests for mapping + intensity bucketing
 
 Exit criteria:
 - Heatmap renders on Dashboard and /body-map
@@ -169,26 +187,26 @@ Goal: Log workouts reliably every session. Data quality rules enforced at input.
 Depends on: Phase 0
 
 Tasks:
-[ ] Auth UI: sign up, sign in, sign out, password reset
-[ ] User settings page: display unit (kg/lbs), first day of week, chart weeks
-[ ] Exercise library:
+[x] Auth UI: sign up, sign in, sign out, password reset
+[x] User settings page: display unit (kg/lbs), first day of week, chart weeks
+[x] Exercise library:
     - List, search, create, edit
     - Fields: name, category, muscle groups, is_compound, movement_type, is_tracked
     - Seed copy on first login
-[ ] Workout programs:
+[x] Workout programs:
     - Create/edit program (name + ordered exercise list)
     - "Start workout from program" pre-populates exercise list
-[ ] Workout logger (Zustand session store):
+[x] Workout logger (Zustand session store):
     - Create workout (date, notes)
     - Add/remove/reorder exercises
     - Log sets: reps, weight (display unit → store kg), RPE, set_type (working/warmup)
     - Default new sets to working; RPE required before save on working sets
     - Previous session auto-fill: same exercise → last weight/reps/RPE
     - Save workout → persist sets → trigger analytics refresh
-[ ] Workout history:
+[x] Workout history:
     - List past workouts (date, duration, exercise count)
     - Detail view: all sets with warmup/working distinction
-[ ] Edit/delete workout (recalculate analytics on change)
+[x] Edit/delete workout (recalculate analytics on change)
 
 Exit criteria:
 - Complete full-body session logged with warmups excluded from analytics
@@ -196,53 +214,278 @@ Exit criteria:
 - Programs reusable across sessions
 
 ================================================================================
-PHASE 2 — ANALYTICS DASHBOARD
+PHASE 2 — ANALYTICS DASHBOARD + BODY MAP EXPLORER
 ================================================================================
 Goal: Answer "Am I progressing?" and "Should I deload?" in plain language.
+      Body-map-first dashboard with per-muscle drill-down.
 
 Depends on: Phase 1 (≥3 weeks of real data recommended for meaningful charts)
 
-Tasks:
-[ ] Analytics refresh (complete implementation):
-    - weekly_volume on calendar week boundary (respect user week_start_day)
+PHASE 2 PROGRESS (complete — Jun 2026)
+  Done:  all Phase 2 items including rest timer, stall, blocks, 2e export/import
+  Ops:   migrations 000009–000014 applied; tune deload thresholds on real/imported data before Phase 3
+
+2a. MUSCLE ATTRIBUTION (first — blocks dashboard data)
+[x] Schema: primary_muscle + secondary_muscles[] + other_muscles[] on exercises
+    - Weights: primary 1.0, secondary 0.5, other 0.3
+    - muscle_groups[] synced via trigger (search/filter compat)
+    - Backfill: 1st tag → primary, 2nd–3rd → secondary, rest → other
+[x] muscle_weekly_volume table (weighted tonnage, sets, avg_rpe per calendar week)
+[x] Exercise builder: tiered muscle pickers (primary required, secondary max 2, other max 3)
+
+2b. ANALYTICS REFRESH + RPCs
+[x] refresh_analytics_for_user (complete):
+    - weekly_volume (raw tonnage) + compound_volume
     - exercise_performance per exercise per week (e1RM, best set, volume)
-    - fatigue_signals on rolling 7-day window
-    - deload_score + deload_tier + reason string
-[ ] Dashboard layout (data-forward, shadcn, no fluff)
+    - muscle_weekly_volume with weighted attribution
+    - fatigue_signals: rolling 7d RPE, rpe_trend, performance_drop, deload_score/tier/reason
+[x] RPCs: get_dashboard_muscle_heatmap, get_muscle_week_stats, get_muscle_volume_history,
+    get_fatigue_summary, get_weekly_summary_nlg
+
+2c. BODY MAP DASHBOARD (hero layout)
+[x] MuscleMapExplorer shared component (dashboard + /body-map deep dive)
+    - Desktop: body left (~40%), detail right; mobile: body top, detail below
+    - Default right panel: weekly stats + deltas + NLG snippet + tap prompt
+    - Muscle tap: weighted tonnage, sets, intensity, vs prior week, top exercises,
+      rolling 7d RPE (labeled), link to /body-map
+    - Calendar week for volume; rolling 7d for RPE (labels must differ)
+[x] /body-map deep dive: time range (chart_weeks), sparkline, full exercise list
+
+[x] Below-the-fold order: Deload card → Weekly summary → Charts (Dashboard.tsx)
 
 Charts (Recharts, range from user setting — default 6 weeks):
-[ ] Weekly volume: tonnage + total sets (toggle), compound vs total
-[ ] Per-lift progress: e1RM over time for is_tracked exercises
-[ ] RPE trend: rolling 7-day avg with calendar week overlay optional
+[x] Weekly volume: tonnage + total sets (toggle)
+[x] Weekly volume: compound vs total toggle (compound_volume stored; chart toggle wired)
+[x] Per-lift progress: e1RM over time for is_tracked exercises
+[x] RPE trend: calendar week avg (working sets) — labeled in card header
 
 Cards:
-[ ] Fatigue / deload card: score, tier (lean/moderate/strong), plain-language reason
-[ ] Weekly summary (template-based NLG MVP, no LLM required):
-    - Tracked lifts: up / flat / down vs prior week
-    - Volume trend by muscle group
-    - RPE direction (last 7 days)
-    - Example: "Squat e1RM up 2%. Chest volume flat. RPE trending high — lean deload."
+[x] Fatigue / deload card: score, tier (lean/moderate/strong), plain-language reason
+[x] Weekly summary NLG (template-based, no LLM)
+
+2d. UI POLISH (full)
+[x] Visual identity: accent color, larger stat typography on dashboard
+[x] Logger: set-complete checkmark, set-type pills, last-session ghost line,
+    sticky footer (timer + finish)
+[x] Logger: optional rest timer after set complete
+[x] Post-workout summary route (/workouts/:id/summary) after save
 
 Progression logic:
-[ ] Stall flag: same weight × reps 2+ weeks at similar RPE (±0.5)
-[ ] performance_drop_detected per tracked exercise (e1RM ≥3% down 2 weeks)
+[x] Stall flag: same weight × reps 2+ weeks at similar RPE (±0.5)
+[x] performance_drop_detected per tracked exercise (e1RM ≥3% down 2 weeks) — in refresh + fatigue card
 
 Training blocks:
-[ ] Manual block create/end (name, dates, notes)
-[ ] Block summary: total volume, sets, avg RPE, PRs, top exercises
-[ ] Compare any two blocks: volume % delta, RPE delta, PRs
+[x] Manual block create/end (name, dates, notes)
+[x] Block summary: total volume, sets, avg RPE, PRs, top exercises
+[x] Compare any two blocks: volume % delta, RPE delta, PRs
+
+2e. DATA EXPORT / IMPORT (test data + backup)
+Goal: Seed or restore workout history locally without manual logging — powers Phase 2
+      analytics validation (dashboard, deload, charts) on realistic volumes.
+
+Format: versioned JSON file (grow-export v1) — NOT Strong/Hevy CSV (see Phase 4).
+
+Export (Settings):
+[x] Download JSON bundle for current user:
+    - exercises (custom only, or all user exercises — include attribution fields)
+    - workouts (date, duration, notes)
+    - sets (exercise ref by stable key: name + movement_type, set_type, reps,
+      weight_kg, rpe)
+    - optional: programs + program_exercises
+    - metadata: exported_at, grow_version, display_unit hint
+
+Import (Settings):
+[x] Upload JSON with validation + preview (workout count, date range, exercise count)
+[x] Import mode:
+    - merge — add workouts; match exercises by name (+ movement_type); create missing
+    - replace — delete existing workouts/sets first (confirm dialog); keep exercises
+      unless file includes exercise definitions to upsert
+[x] After import: call refresh_analytics_for_user for current user
+[x] Client-side only for MVP (no Supabase Storage); file download via blob URL
+
+Implementation notes:
+- Match imported sets to exercises by (name, movement_type) — create exercise if missing
+  with muscle attribution from file or backfill from muscle_groups[]
+- Preserve weight_kg in export (canonical); respect user display_unit on import UI labels only
+- Idempotent merge: optional skip workouts with same date + exercise fingerprint (defer)
+
+Exit (2e):
+- Export → clear account workouts → import → dashboard shows same weekly/muscle stats
+- Usable to load 3+ weeks of synthetic history for Phase 2 tuning
+
+Tonnage display rule (implemented):
+[x] Headline weekly volume = raw total (no muscle double-count)
+[x] Per-muscle heatmap/detail = weighted tonnage (footnote on weight tiers)
+
+Infrastructure (migrations + client):
+[x] 20250608000009_muscle_attribution.sql (primary/secondary/other + muscle_weekly_volume)
+[x] 20250608000010_analytics_refresh_phase2.sql
+[x] 20250608000011_muscle_rpcs.sql
+[x] 20250608000012_analytics_refresh_after_sets.sql (auth guard + delete trigger)
+[x] Client: MuscleMapExplorer, DeloadCard, DashboardCharts, useMuscleAnalytics hooks
+[x] Client: lib/body-map/attribution.ts + muscle-attribution.test.ts
+[x] Remote DB: all migrations applied via `supabase db push`
 
 Exit criteria:
-- After logging, dashboard updates within one refresh cycle
-- Deload card produces sensible tier + explanation on test scenarios
-- Weekly summary readable without interpreting raw charts
+[x] After logging, dashboard body map shows real weighted volume within one refresh
+    (requires migrations applied + refresh_analytics_for_user)
+[x] Tap muscle → detail with prior-week delta, top exercises, labeled rolling-7d RPE
+[x] Deload card produces sensible tier + explanation
+[x] Logger set-complete + post-workout summary on save
+[x] Exercise builder tiered pickers; seed backfilled
+[x] Export/import round-trip restores workouts and refreshes analytics (2e)
+[x] npm run test + build pass
+[ ] Deload card tuned on ≥3 weeks personal data (subjective exit)
+
+================================================================================
+PHASE 2.5 — FOCUS LOGGER + RICH SET LOGGING
+================================================================================
+Goal: Gym-floor-first active workout UX + program splits (2.5a), then expressive
+      set logging with RIR, set types, and unilateral support (2.5b) without
+      Phase 3 prescription. Analytics-aware logger shell for Phase 3 to fill.
+
+Depends on: Phase 2 complete (especially 2e export/import v1 before 2.5b schema)
+Blocks: Phase 3 prescription UI (builds on focus logger + set model)
+
+Build order within 2.5: 2.5a → 2.5b → 2.5b.2 (myo-reps). Do NOT start 2.5b
+until grow-export v1 is shipped; bump to grow-export v2 when 2.5b columns land.
+
+LOCKED DECISIONS (grill session — Jun 2026)
+
+Focus logger (2.5a):
+- Mobile-only focus mode default (<sm / touch-primary): one exercise at a time,
+  swipe or progress dots to jump; completed exercises collapse to compact strip
+- Desktop keeps multi-exercise scroll list (no forced focus mode)
+- Session metadata (date, duration, notes) collapsible during active logging
+- Autofill: full last-session pattern — all set rows (count, type, weight, reps,
+  effort) as starting placeholders when adding exercise or starting program day
+- Rest timer: auto-start on set ✓ when users_settings.rest_timer_enabled
+  - Cascade: exercises.default_rest_seconds → users_settings.rest_timer_seconds
+    → 90s default
+  - Drop-set skip (no rest between consecutive drops) ships with 2.5b set types
+
+Programs (2.5a):
+- program_days table: program_id, name, sort_order
+- program_exercises references program_day_id (not program_id directly)
+- Start workout: pick program → pick day → preload that day's exercises
+
+Effort (2.5a behavior change + 2.5b RIR):
+- Optional during session; confirmation on save if working sets lack effort
+- Global effort_metric in users_settings: rpe | rir (default rpe)
+
+Set types (2.5b v1):
+- Keep set_type (or rename set_kind): warmup | working for analytics gate
+- sets.technique on working rows: none | failure | drop (enum; extend in 2.5b.2)
+- UI: tap set # → bottom sheet; keep W/Work quick pills for warmup/working
+- Failure: optional auto-suggest effort RIR 0 / RPE 10 (implement in 2.5b)
+
+Analytics (2.5b):
+- Volume: all non-warmup rows at logged weight × reps (full tonnage)
+- e1RM / best-set: technique in (none, failure, amrap, myo_activation); exclude drop
+- Fatigue / deload: avg RPE on working sets where effort logged (nulls skipped)
+- Unilateral alternating mode: volume × 2 for parity with bilateral barbell work
+
+Unilateral (2.5b):
+- exercises.logging_mode: bilateral | unilateral_alternating | unilateral_per_side
+- sets.side: left | right | both | null when unilateral_per_side
+- Weight field = one dumbbell load for per_side; reps = that side
+
+Myo-reps (2.5b.2 — fast follow after core set types):
+- Grouped block UI; flat rows linked by sets.set_group_id + set_group_seq
+- Roles via technique: myo_activation | myo_mini
+- Short rest (~15s) between minis; long rest after group completes
+- e1RM from activation only; all segments count toward volume
+
+Out of scope for 2.5:
+- AI mesocycles, set/rep/RPE prescription targets (Phase 3)
+- Social, video library, rest-pause / AMRAP / backoff set types (defer post-2.5b.2)
+- Hard-set discount factors (Reps-app 0.5× drops) — defer until deload tuning
+- Analytics whispers in focus mode (e1RM trend on card) — optional; not required exit
+
+--------------------------------------------------------------------------------
+2.5a. FOCUS LOGGER + PROGRAM DAYS
+--------------------------------------------------------------------------------
+
+Schema:
+[ ] program_days (id, program_id, name, sort_order)
+[ ] Migrate program_exercises → program_day_id FK
+[ ] exercises.default_rest_seconds nullable smallint (30–600)
+
+Logger UX:
+[ ] Mobile focus mode: single exercise view, progress nav, collapsed completed
+[ ] Full last-session autofill (batch on program day start + per exercise add)
+[ ] Session details accordion (date, duration, notes); optional duration from elapsed timer on save
+[ ] Rest timer: respect cascade; Settings toggle + default seconds (existing columns)
+[ ] Per-exercise default rest in exercise create/edit
+
+Program builder:
+[ ] Program editor: days list, exercises per day, drag-reorder within day
+[ ] Programs page: Start → pick day → /workouts/active?programId=&dayId=
+
+Exit (2.5a):
+[ ] Start PPL-style program day on phone; log via focus mode without long scroll
+[ ] Rest timer fires on ✓ when enabled; per-exercise override honored
+[ ] Save warns on missing effort but allows save
+[ ] npm run test + build pass
+
+--------------------------------------------------------------------------------
+2.5b. SET TYPES + RIR + UNILATERAL
+--------------------------------------------------------------------------------
+
+Prerequisite: grow-export v1 shipped; plan grow-export v2 fields before migration.
+
+Schema:
+[ ] set_technique enum: none, failure, drop (+ myo_activation, myo_mini in 2.5b.2)
+[ ] sets: technique, side, effort_rir nullable
+[ ] users_settings.effort_metric: rpe | rir
+[ ] exercises.logging_mode
+
+Analytics refresh:
+[ ] Volume: set_type != warmup (unchanged gate, technique does not exclude volume)
+[ ] e1RM best-set: filter technique not in (drop, myo_mini)
+[ ] refresh_analytics_for_user + RPCs unchanged for RPE averages (canonical rpe column)
+
+Logger UX:
+[ ] Effort chip select (RPE or RIR per global setting)
+[ ] Set # bottom sheet: warmup / working / failure / drop
+[ ] Drop + rest: skip timer when next set technique = drop
+[ ] Unilateral: logging_mode on exercise form; L/R on set row when per_side
+[ ] Detail/history/summary: show technique + side labels
+
+Export/import:
+[ ] grow-export v2: technique, side, effort_rir, logging_mode, default_rest_seconds
+[ ] Import v1 files still works (defaults: technique none, bilateral)
+
+Exit (2.5b):
+[ ] Log drop ladder + failure set; volume and e1RM rules match locked decisions
+[ ] Switch Settings to RIR; analytics deload still sensible after conversion
+[ ] Single-arm exercise with L/R sides; no 2× volume bug on alternating mode
+[ ] Export v2 → import → dashboard stats preserved
+
+--------------------------------------------------------------------------------
+2.5b.2. MYO-REPS (fast follow)
+--------------------------------------------------------------------------------
+
+[ ] set_group_id + set_group_seq on sets
+[ ] "Add myo-rep" creates activation + mini rows; 15s rest between minis
+[ ] extend set_technique + export v2 (group fields)
+[ ] e1RM from activation only; group counts as one logical intensifier in UI
+
+Exit (2.5b.2):
+[ ] Log full myo-rep sequence; history shows collapsed group; volume correct
+
+Phase 2.5 exit criteria (all sub-phases):
+[ ] Daily phone sessions feel faster than Phase 1 scroll logger (subjective)
+[ ] Program days replace need for separate programs per split day
+[ ] Set types + RIR/unilateral do not break Phase 2 deload or muscle heatmap
+[ ] npm run test + build pass; migrations + RLS verified
 
 ================================================================================
 PHASE 3 — AI PROGRAMMING
 ================================================================================
 Goal: Mesocycle planning + auto-regulation based on your own history.
 
-Depends on: Phase 2 trustworthy for ≥1 full mesocycle of personal use
+Depends on: Phase 2 trustworthy + Phase 2.5 logger shell for ≥1 full mesocycle
 
 Tasks:
 [ ] Extend programs to full prescription:
@@ -265,12 +508,99 @@ Exit criteria:
 - Block debrief summarizes completed manual or AI block
 
 ================================================================================
+PHASE 3.5 — MOBILE ACCESS + UI REVAMP (ANDROID)
+================================================================================
+Goal: Use Grow daily on Android — mobile-first UX + app-like install without
+      hosting a server on the phone. Frontend on static hosting; Supabase stays
+      cloud-hosted.
+
+Depends on: Phase 2 trustworthy for real sessions (can start before Phase 3).
+            Phase 2.5a focus logger overlaps 3.5a mobile logger pass — prefer 2.5a
+            first, then 3.5a polishes remaining routes.
+
+LOCKED DECISIONS (mobile UX)
+- Primary device target: phone portrait (≈360–430px wide); desktop layouts stay
+- Navigation: bottom tab bar on <sm; keep header minimal (brand + Log workout)
+- Logger is the hero flow — optimize set entry for one-thumb use between sets
+- Touch targets ≥44px; tabular-nums on weight/reps/RPE; avoid hover-only affordances
+- Safe-area padding for notched screens + standalone PWA (env(safe-area-inset-*))
+- No separate native Android codebase for MVP (responsive web + optional PWA)
+
+LOCKED DECISIONS (mobile deploy)
+- Primary path: deploy Vite build (dist/) to static hosting — Vercel, Netlify, or
+  Cloudflare Pages (pick one; all equivalent for this SPA)
+- NOT Replit-on-phone / Termux dev server for daily use (fine for experiments only)
+- No custom backend on device; no self-hosted Supabase on Android
+- Env at build time: VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY (host dashboard)
+- Auth redirect URLs must include production origin (e.g. /reset-password)
+- Dev testing on LAN: npm run dev -- --host → phone browser to PC IP:5173
+
+Tasks:
+
+3.5a. MOBILE UI REVAMP (before or alongside deploy)
+    Note: Phase 2.5a focus logger covers core /workouts/active mobile UX; 3.5a
+    polishes remaining routes and global shell (tabs, safe-area, QA matrix).
+[ ] AppShell mobile navigation:
+    - Bottom tab bar (<sm): Dashboard, Workouts, Exercises, More (body map, programs, settings)
+    - Hide desktop inline nav on small screens; pad main content above tab bar (pb-safe)
+[ ] Logger mobile pass (/workouts/active):
+    - Largely owned by Phase 2.5a if shipped; otherwise: set row targets, sticky footer
+    - Set row: large tap targets; weight/reps/effort inputs thumb-friendly
+    - Sticky footer: Finish + timer always visible; safe-area bottom inset
+    - Exercise add/reorder usable without horizontal scroll
+[ ] Dashboard + body map mobile pass:
+    - MuscleMapExplorer: body map readable height on narrow viewports; detail panel scannable
+    - Charts: legible axis labels; no clipped tooltips; single-column card stack
+    - Deload + weekly summary: no cramped multi-column on <sm
+[ ] Lists + forms mobile pass:
+    - Workouts list, exercise library, settings: full-width actions; dialogs sheet-style on mobile
+    - Auth pages: centered, no overflow on small keyboards
+[ ] Global polish:
+    - viewport meta + input font-size ≥16px where needed (prevent iOS/Android zoom-on-focus)
+    - prefers-reduced-motion respected on new transitions
+    - Manual QA matrix: 360px + 412px widths; light + dark theme
+
+3.5b. DEPLOY + INSTALL
+[ ] Production deploy:
+    - npm run build → deploy dist/ to chosen static host
+    - Set VITE_SUPABASE_URL + VITE_SUPABASE_ANON_KEY in host env
+    - Document production URL in repo (.env.example comment or deploy note — no secrets)
+[ ] Supabase Auth URL config:
+    - Add https://<prod-domain>/reset-password to Redirect URLs
+    - Keep localhost redirect for local dev
+[ ] Mobile smoke test (Android Chrome):
+    - Sign in / sign out
+    - Password reset flow end-to-end
+    - Log a workout (logger UX on small viewport)
+    - Dashboard + body map load after save
+[ ] Home screen install (minimum):
+    - Verify “Add to Home screen” / bookmark works on deployed URL
+[ ] PWA polish (recommended):
+    - web app manifest (name, icons, theme_color, display: standalone)
+    - Optional service worker for offline shell (read-only OK; writes need network)
+[ ] Defer unless Play Store wanted:
+    - Capacitor APK wrapper (same deployed URL or bundled assets)
+
+Out of scope for 3.5:
+- Running npm run dev on Android (Termux)
+- iOS native app (see Phase 4)
+- Multi-device sync beyond Supabase (Realtime stays Phase 4)
+
+Exit criteria:
+- All primary routes usable one-handed on 360px Android Chrome (no missing nav)
+- Logger: complete a full session without horizontal scroll or mis-taps on set inputs
+- Production URL opens on Android Chrome; auth + logging + dashboard work
+- Password reset completes on production origin
+- App usable from home screen (PWA install or bookmark)
+- No secrets committed; anon key only in host env (RLS protects data)
+
+================================================================================
 PHASE 4 — FUTURE (not scheduled — promote when ready)
 ================================================================================
 
 [ ] Auto-suggest training block boundaries from deload events
 [ ] recovery_metrics: manual entry → later Apple Health / HRV integration
-[ ] CSV export / import (Strong, Hevy migration)
+[ ] CSV import from Strong / Hevy (third-party migration — Grow JSON export is Phase 2e)
 [ ] Google OAuth
 [ ] Supabase Realtime for multi-device live sync
 [ ] iOS wrapper (Capacitor or native)
@@ -284,18 +614,21 @@ PHASE 4 — FUTURE (not scheduled — promote when ready)
 BUILD ORDER SUMMARY
 ================================================================================
 
-Phase 0 → Phase 1 → Phase 2 → Phase 3 → Phase 4 (as needed)
+Phase 0 → Phase 1 → Phase 2 → Phase 2.5 → Phase 3 → Phase 3.5 → Phase 4 (as needed)
 
 Critical path:
-  schema + e1RM lib → logging UX → analytics refresh → dashboard → AI
+  schema + e1RM lib → logging UX → analytics refresh → dashboard
+  → focus logger + set model (2.5) → AI prescription (3) → mobile deploy (3.5)
 
 Do NOT start Phase 3 until Phase 2 weekly summaries feel right on your own data.
+Do NOT start Phase 2.5b until Phase 2e export/import v1 is shipped.
+Phase 3.5 can start once Phase 2 is good enough for daily phone use; 2.5a reduces 3.5a logger scope.
 
 ================================================================================
 OPEN ITEMS (minor — resolve during Phase 0/1)
 ================================================================================
 
-[ ] React framework: Vite SPA vs Next.js (recommend Vite SPA for solo dashboard app)
+[x] React framework: Vite SPA vs Next.js (recommend Vite SPA for solo dashboard app)
 [ ] Deload score weights/thresholds — tune in Phase 2 with real data
 [ ] App name TBD
 [ ] Exact list of ~30–50 seed exercises (derive from your current program)

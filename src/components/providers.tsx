@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { lazy, Suspense, useState, type ReactNode } from 'react'
+import { AuthProvider } from '@/hooks/useAuth'
 import { ShapeProvider } from '@/lib/shape-context'
 import { SurfaceProvider } from '@/lib/surface-context'
 import { ThemeProvider } from '@/lib/theme'
@@ -26,16 +27,18 @@ export function Providers({ children }: { children: ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <ShapeProvider defaultShape="rounded">
-          <SurfaceProvider value={1}>{children}</SurfaceProvider>
-        </ShapeProvider>
-      </ThemeProvider>
-      {import.meta.env.DEV && (
-        <Suspense fallback={null}>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </Suspense>
-      )}
+      <AuthProvider>
+        <ThemeProvider>
+          <ShapeProvider defaultShape="rounded">
+            <SurfaceProvider value={1}>{children}</SurfaceProvider>
+          </ShapeProvider>
+        </ThemeProvider>
+        {import.meta.env.DEV && (
+          <Suspense fallback={null}>
+            <ReactQueryDevtools initialIsOpen={false} />
+          </Suspense>
+        )}
+      </AuthProvider>
     </QueryClientProvider>
   )
 }

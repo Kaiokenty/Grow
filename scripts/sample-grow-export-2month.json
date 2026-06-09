@@ -1,0 +1,3996 @@
+{
+  "grow_version": 1,
+  "exported_at": "2026-06-09T00:55:41.342Z",
+  "display_unit_hint": "kg",
+  "exercises": [
+    {
+      "name": "Barbell Back Squat",
+      "movement_type": "lower_compound",
+      "category": "legs",
+      "muscle_groups": [
+        "quads",
+        "glutes",
+        "hamstrings"
+      ],
+      "primary_muscle": "quads",
+      "secondary_muscles": [
+        "glutes",
+        "hamstrings"
+      ],
+      "other_muscles": [],
+      "is_compound": true,
+      "is_tracked": true
+    },
+    {
+      "name": "Romanian Deadlift",
+      "movement_type": "lower_hinge",
+      "category": "legs",
+      "muscle_groups": [
+        "hamstrings",
+        "glutes",
+        "back"
+      ],
+      "primary_muscle": "hamstrings",
+      "secondary_muscles": [
+        "glutes",
+        "back"
+      ],
+      "other_muscles": [],
+      "is_compound": true,
+      "is_tracked": true
+    },
+    {
+      "name": "Bench Press",
+      "movement_type": "upper_push",
+      "category": "chest",
+      "muscle_groups": [
+        "chest",
+        "triceps",
+        "shoulders"
+      ],
+      "primary_muscle": "chest",
+      "secondary_muscles": [
+        "triceps",
+        "shoulders"
+      ],
+      "other_muscles": [],
+      "is_compound": true,
+      "is_tracked": true
+    },
+    {
+      "name": "Overhead Press",
+      "movement_type": "upper_push",
+      "category": "shoulders",
+      "muscle_groups": [
+        "shoulders",
+        "triceps"
+      ],
+      "primary_muscle": "shoulders",
+      "secondary_muscles": [
+        "triceps"
+      ],
+      "other_muscles": [
+        "chest"
+      ],
+      "is_compound": true,
+      "is_tracked": true
+    },
+    {
+      "name": "Barbell Row",
+      "movement_type": "upper_pull",
+      "category": "back",
+      "muscle_groups": [
+        "back",
+        "biceps"
+      ],
+      "primary_muscle": "back",
+      "secondary_muscles": [
+        "biceps"
+      ],
+      "other_muscles": [],
+      "is_compound": true,
+      "is_tracked": true
+    },
+    {
+      "name": "Lat Pulldown",
+      "movement_type": "upper_pull",
+      "category": "back",
+      "muscle_groups": [
+        "back",
+        "biceps"
+      ],
+      "primary_muscle": "back",
+      "secondary_muscles": [
+        "biceps"
+      ],
+      "other_muscles": [],
+      "is_compound": false,
+      "is_tracked": false
+    },
+    {
+      "name": "Leg Press",
+      "movement_type": "lower_compound",
+      "category": "legs",
+      "muscle_groups": [
+        "quads",
+        "glutes"
+      ],
+      "primary_muscle": "quads",
+      "secondary_muscles": [
+        "glutes"
+      ],
+      "other_muscles": [],
+      "is_compound": true,
+      "is_tracked": false
+    },
+    {
+      "name": "Incline Dumbbell Press",
+      "movement_type": "upper_push",
+      "category": "chest",
+      "muscle_groups": [
+        "chest",
+        "shoulders",
+        "triceps"
+      ],
+      "primary_muscle": "chest",
+      "secondary_muscles": [
+        "shoulders",
+        "triceps"
+      ],
+      "other_muscles": [],
+      "is_compound": false,
+      "is_tracked": false
+    },
+    {
+      "name": "Cable Fly",
+      "movement_type": "isolation",
+      "category": "chest",
+      "muscle_groups": [
+        "chest"
+      ],
+      "primary_muscle": "chest",
+      "secondary_muscles": [],
+      "other_muscles": [],
+      "is_compound": false,
+      "is_tracked": false
+    },
+    {
+      "name": "Lateral Raise",
+      "movement_type": "isolation",
+      "category": "shoulders",
+      "muscle_groups": [
+        "shoulders"
+      ],
+      "primary_muscle": "shoulders",
+      "secondary_muscles": [],
+      "other_muscles": [],
+      "is_compound": false,
+      "is_tracked": false
+    },
+    {
+      "name": "Tricep Pushdown",
+      "movement_type": "isolation",
+      "category": "arms",
+      "muscle_groups": [
+        "triceps"
+      ],
+      "primary_muscle": "triceps",
+      "secondary_muscles": [],
+      "other_muscles": [],
+      "is_compound": false,
+      "is_tracked": false
+    },
+    {
+      "name": "Barbell Curl",
+      "movement_type": "isolation",
+      "category": "arms",
+      "muscle_groups": [
+        "biceps"
+      ],
+      "primary_muscle": "biceps",
+      "secondary_muscles": [],
+      "other_muscles": [],
+      "is_compound": false,
+      "is_tracked": false
+    },
+    {
+      "name": "Leg Curl",
+      "movement_type": "isolation",
+      "category": "legs",
+      "muscle_groups": [
+        "hamstrings"
+      ],
+      "primary_muscle": "hamstrings",
+      "secondary_muscles": [],
+      "other_muscles": [],
+      "is_compound": false,
+      "is_tracked": false
+    },
+    {
+      "name": "Calf Raise",
+      "movement_type": "isolation",
+      "category": "legs",
+      "muscle_groups": [
+        "calves"
+      ],
+      "primary_muscle": "calves",
+      "secondary_muscles": [],
+      "other_muscles": [],
+      "is_compound": false,
+      "is_tracked": false
+    }
+  ],
+  "workouts": [
+    {
+      "date": "2026-04-07",
+      "duration_minutes": 58,
+      "notes": "Push A — week 1",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "warmup",
+          "reps": 10,
+          "weight_kg": 60,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 80,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 80,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 4,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 77.5,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Overhead Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 50,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Overhead Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 50,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Incline Dumbbell Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 28,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Incline Dumbbell Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 28,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lateral Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 8,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lateral Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 8,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Tricep Pushdown",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 25,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Tricep Pushdown",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 25,
+          "rpe": 8,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-09",
+      "duration_minutes": 52,
+      "notes": "Pull A — week 1",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 70,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 70,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 65,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lat Pulldown",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 55,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lat Pulldown",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 55,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 30,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 30,
+          "rpe": 8,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-11",
+      "duration_minutes": 68,
+      "notes": "Legs A — week 1",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 1,
+          "set_type": "warmup",
+          "reps": 8,
+          "weight_kg": 60,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 2,
+          "set_type": "warmup",
+          "reps": 5,
+          "weight_kg": 80,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 100,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 4,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 100,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 5,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 95,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Romanian Deadlift",
+            "movement_type": "lower_hinge"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 90,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Romanian Deadlift",
+            "movement_type": "lower_hinge"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 90,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Press",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 120,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Press",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 120,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 35,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 35,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Calf Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 60,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Calf Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 60,
+          "rpe": 7.5,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-14",
+      "duration_minutes": 62,
+      "notes": "Push A — week 2",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "warmup",
+          "reps": 10,
+          "weight_kg": 60,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 82.5,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 82.5,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 4,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 80,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Overhead Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 51.25,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Overhead Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 51.25,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Incline Dumbbell Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 29,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Incline Dumbbell Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 29,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lateral Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 8,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lateral Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 8,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Tricep Pushdown",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 26,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Tricep Pushdown",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 26,
+          "rpe": 8,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-16",
+      "duration_minutes": 53,
+      "notes": "Pull A — week 2",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 72.5,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 72.5,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 67.5,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lat Pulldown",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 57,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lat Pulldown",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 57,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 31,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 31,
+          "rpe": 8,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-18",
+      "duration_minutes": 73,
+      "notes": "Legs A — week 2",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 1,
+          "set_type": "warmup",
+          "reps": 8,
+          "weight_kg": 60,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 2,
+          "set_type": "warmup",
+          "reps": 5,
+          "weight_kg": 80,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 105,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 4,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 105,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 5,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 100,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Romanian Deadlift",
+            "movement_type": "lower_hinge"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 92.5,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Romanian Deadlift",
+            "movement_type": "lower_hinge"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 92.5,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Press",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 125,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Press",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 125,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 36,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 36,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Calf Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 62,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Calf Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 62,
+          "rpe": 7.5,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-21",
+      "duration_minutes": 66,
+      "notes": "Push A — week 3",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "warmup",
+          "reps": 10,
+          "weight_kg": 60,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 85,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 85,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 4,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 82.5,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Overhead Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 52.5,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Overhead Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 52.5,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Incline Dumbbell Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 30,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Incline Dumbbell Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 30,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lateral Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 8,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lateral Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 8,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Tricep Pushdown",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 27,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Tricep Pushdown",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 27,
+          "rpe": 8,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-23",
+      "duration_minutes": 54,
+      "notes": "Pull A — week 3",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 75,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 75,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 70,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lat Pulldown",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 59,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lat Pulldown",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 59,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 32,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 32,
+          "rpe": 8,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-25",
+      "duration_minutes": 68,
+      "notes": "Legs A — week 3",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 1,
+          "set_type": "warmup",
+          "reps": 8,
+          "weight_kg": 60,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 2,
+          "set_type": "warmup",
+          "reps": 5,
+          "weight_kg": 80,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 110,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 4,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 110,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 5,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 105,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Romanian Deadlift",
+            "movement_type": "lower_hinge"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 95,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Romanian Deadlift",
+            "movement_type": "lower_hinge"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 95,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Press",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 130,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Press",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 130,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 37,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 37,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Calf Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 64,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Calf Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 64,
+          "rpe": 7.5,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-28",
+      "duration_minutes": 58,
+      "notes": "Push A — week 4",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "warmup",
+          "reps": 10,
+          "weight_kg": 60,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 87.5,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 87.5,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 4,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 85,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Overhead Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 53.75,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Overhead Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 53.75,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Incline Dumbbell Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 31,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Incline Dumbbell Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 31,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lateral Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 8,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lateral Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 8,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Tricep Pushdown",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 28,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Tricep Pushdown",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 28,
+          "rpe": 8,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-30",
+      "duration_minutes": 55,
+      "notes": "Pull A — week 4",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 77.5,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 77.5,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 72.5,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lat Pulldown",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 61,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lat Pulldown",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 61,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 33,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 33,
+          "rpe": 8,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-02",
+      "duration_minutes": 73,
+      "notes": "Legs A — week 4",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 1,
+          "set_type": "warmup",
+          "reps": 8,
+          "weight_kg": 60,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 2,
+          "set_type": "warmup",
+          "reps": 5,
+          "weight_kg": 80,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 115,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 4,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 115,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 5,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 110,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Romanian Deadlift",
+            "movement_type": "lower_hinge"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 97.5,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Romanian Deadlift",
+            "movement_type": "lower_hinge"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 97.5,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Press",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 135,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Press",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 135,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 38,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 38,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Calf Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 66,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Calf Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 66,
+          "rpe": 7.5,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-05",
+      "duration_minutes": 62,
+      "notes": "Push A — week 5",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "warmup",
+          "reps": 10,
+          "weight_kg": 60,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 90,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 90,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 4,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 87.5,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Overhead Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 55,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Overhead Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 55,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Incline Dumbbell Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 32,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Incline Dumbbell Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 32,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lateral Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 8,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lateral Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 8,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Tricep Pushdown",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 29,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Tricep Pushdown",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 29,
+          "rpe": 8,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-07",
+      "duration_minutes": 56,
+      "notes": "Pull A — week 5",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 80,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 80,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 75,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lat Pulldown",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 63,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lat Pulldown",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 63,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 34,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 34,
+          "rpe": 8,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-09",
+      "duration_minutes": 68,
+      "notes": "Legs A — week 5",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 1,
+          "set_type": "warmup",
+          "reps": 8,
+          "weight_kg": 60,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 2,
+          "set_type": "warmup",
+          "reps": 5,
+          "weight_kg": 80,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 120,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 4,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 120,
+          "rpe": 9,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 5,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 115,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Romanian Deadlift",
+            "movement_type": "lower_hinge"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 100,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Romanian Deadlift",
+            "movement_type": "lower_hinge"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 100,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Press",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 140,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Press",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 140,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 39,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 39,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Calf Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 68,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Calf Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 68,
+          "rpe": 7.5,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-12",
+      "duration_minutes": 66,
+      "notes": "Push A — week 6",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "warmup",
+          "reps": 10,
+          "weight_kg": 60,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 92.5,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 92.5,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 4,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 90,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Overhead Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 56.25,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Overhead Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 56.25,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Incline Dumbbell Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 33,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Incline Dumbbell Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 33,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lateral Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 8,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lateral Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 8,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Tricep Pushdown",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 30,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Tricep Pushdown",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 30,
+          "rpe": 8,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-14",
+      "duration_minutes": 57,
+      "notes": "Pull A — week 6",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 82.5,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 82.5,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 77.5,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lat Pulldown",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 65,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lat Pulldown",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 65,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 35,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 35,
+          "rpe": 8,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-16",
+      "duration_minutes": 73,
+      "notes": "Legs A — week 6",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 1,
+          "set_type": "warmup",
+          "reps": 8,
+          "weight_kg": 60,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 2,
+          "set_type": "warmup",
+          "reps": 5,
+          "weight_kg": 80,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 125,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 4,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 125,
+          "rpe": 9,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 5,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 120,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Romanian Deadlift",
+            "movement_type": "lower_hinge"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 102.5,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Romanian Deadlift",
+            "movement_type": "lower_hinge"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 102.5,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Press",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 145,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Press",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 145,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 40,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 40,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Calf Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 70,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Calf Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 70,
+          "rpe": 7.5,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-19",
+      "duration_minutes": 58,
+      "notes": "Push A — week 7 (bench stalling)",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "warmup",
+          "reps": 10,
+          "weight_kg": 60,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 95,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 95,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 4,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 92.5,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Overhead Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 57.5,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Overhead Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 57.5,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Incline Dumbbell Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 34,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Incline Dumbbell Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 34,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lateral Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 8,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lateral Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 8,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Tricep Pushdown",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 31,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Tricep Pushdown",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 31,
+          "rpe": 8,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-21",
+      "duration_minutes": 58,
+      "notes": "Pull A — week 7",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 85,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 85,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 80,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lat Pulldown",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 67,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lat Pulldown",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 67,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 36,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 36,
+          "rpe": 8,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-23",
+      "duration_minutes": 68,
+      "notes": "Legs A — week 7",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 1,
+          "set_type": "warmup",
+          "reps": 8,
+          "weight_kg": 60,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 2,
+          "set_type": "warmup",
+          "reps": 5,
+          "weight_kg": 80,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 130,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 4,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 130,
+          "rpe": 9,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 5,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 125,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Romanian Deadlift",
+            "movement_type": "lower_hinge"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 105,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Romanian Deadlift",
+            "movement_type": "lower_hinge"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 105,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Press",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 150,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Press",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 150,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 41,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 41,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Calf Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 72,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Calf Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 72,
+          "rpe": 7.5,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-26",
+      "duration_minutes": 62,
+      "notes": "Push A — week 8 (bench stalling)",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "warmup",
+          "reps": 10,
+          "weight_kg": 60,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 95,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 95,
+          "rpe": 9,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 4,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 92.5,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Overhead Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 58.75,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Overhead Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 58.75,
+          "rpe": 9,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Incline Dumbbell Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 35,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Incline Dumbbell Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 35,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lateral Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 8,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lateral Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 8,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Tricep Pushdown",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 32,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Tricep Pushdown",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 32,
+          "rpe": 8,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-28",
+      "duration_minutes": 59,
+      "notes": "Pull A — week 8",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 87.5,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 87.5,
+          "rpe": 9,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 82.5,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lat Pulldown",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 69,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lat Pulldown",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 69,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 37,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 37,
+          "rpe": 8,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-30",
+      "duration_minutes": 73,
+      "notes": "Legs A — week 8 (squat fatigue)",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 1,
+          "set_type": "warmup",
+          "reps": 8,
+          "weight_kg": 60,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 2,
+          "set_type": "warmup",
+          "reps": 5,
+          "weight_kg": 80,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 127.5,
+          "rpe": 9,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 4,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 127.5,
+          "rpe": 9.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 5,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 122.5,
+          "rpe": 9,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Romanian Deadlift",
+            "movement_type": "lower_hinge"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 107.5,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Romanian Deadlift",
+            "movement_type": "lower_hinge"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 107.5,
+          "rpe": 9,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Press",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 155,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Press",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 155,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 42,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 42,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Calf Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 74,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Calf Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 74,
+          "rpe": 7.5,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-06-02",
+      "duration_minutes": 66,
+      "notes": "Push A — week 9 (bench stalling)",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "warmup",
+          "reps": 10,
+          "weight_kg": 60,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 95,
+          "rpe": 9,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 95,
+          "rpe": 9.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Bench Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 4,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 92.5,
+          "rpe": 9,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Overhead Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 60,
+          "rpe": 9,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Overhead Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 60,
+          "rpe": 9.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Incline Dumbbell Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 36,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Incline Dumbbell Press",
+            "movement_type": "upper_push"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 36,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lateral Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 8,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lateral Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 8,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Tricep Pushdown",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 33,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Tricep Pushdown",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 33,
+          "rpe": 8,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-06-04",
+      "duration_minutes": 60,
+      "notes": "Pull A — week 9",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 90,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 6,
+          "weight_kg": 90,
+          "rpe": 9,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Row",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 85,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lat Pulldown",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 71,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Lat Pulldown",
+            "movement_type": "upper_pull"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 71,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 38,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 10,
+          "weight_kg": 38,
+          "rpe": 8,
+          "notes": null
+        }
+      ]
+    },
+    {
+      "date": "2026-06-06",
+      "duration_minutes": 68,
+      "notes": "Legs A — week 9 (squat fatigue)",
+      "sets": [
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 1,
+          "set_type": "warmup",
+          "reps": 8,
+          "weight_kg": 60,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 2,
+          "set_type": "warmup",
+          "reps": 5,
+          "weight_kg": 80,
+          "rpe": null,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 3,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 120,
+          "rpe": 9,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 4,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 120,
+          "rpe": 9.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Barbell Back Squat",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 5,
+          "set_type": "working",
+          "reps": 5,
+          "weight_kg": 115,
+          "rpe": 9,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Romanian Deadlift",
+            "movement_type": "lower_hinge"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 110,
+          "rpe": 8.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Romanian Deadlift",
+            "movement_type": "lower_hinge"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 8,
+          "weight_kg": 110,
+          "rpe": 9,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Press",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 160,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Press",
+            "movement_type": "lower_compound"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 160,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 43,
+          "rpe": 7.5,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Leg Curl",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 12,
+          "weight_kg": 43,
+          "rpe": 8,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Calf Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 1,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 76,
+          "rpe": 7,
+          "notes": null
+        },
+        {
+          "exercise_key": {
+            "name": "Calf Raise",
+            "movement_type": "isolation"
+          },
+          "set_number": 2,
+          "set_type": "working",
+          "reps": 15,
+          "weight_kg": 76,
+          "rpe": 7.5,
+          "notes": null
+        }
+      ]
+    }
+  ],
+  "programs": [
+    {
+      "name": "Upper / Lower 4-day",
+      "notes": "Push + Pull + Legs + Upper pump. Full-body hypertrophy split.",
+      "exercise_keys": [
+        {
+          "name": "Bench Press",
+          "movement_type": "upper_push"
+        },
+        {
+          "name": "Overhead Press",
+          "movement_type": "upper_push"
+        },
+        {
+          "name": "Incline Dumbbell Press",
+          "movement_type": "upper_push"
+        },
+        {
+          "name": "Barbell Row",
+          "movement_type": "upper_pull"
+        },
+        {
+          "name": "Lat Pulldown",
+          "movement_type": "upper_pull"
+        },
+        {
+          "name": "Barbell Back Squat",
+          "movement_type": "lower_compound"
+        },
+        {
+          "name": "Romanian Deadlift",
+          "movement_type": "lower_hinge"
+        },
+        {
+          "name": "Leg Curl",
+          "movement_type": "isolation"
+        }
+      ]
+    },
+    {
+      "name": "Strength Fundamentals",
+      "notes": "Tracked compounds only — use for progression-focused blocks.",
+      "exercise_keys": [
+        {
+          "name": "Barbell Back Squat",
+          "movement_type": "lower_compound"
+        },
+        {
+          "name": "Bench Press",
+          "movement_type": "upper_push"
+        },
+        {
+          "name": "Barbell Row",
+          "movement_type": "upper_pull"
+        },
+        {
+          "name": "Romanian Deadlift",
+          "movement_type": "lower_hinge"
+        },
+        {
+          "name": "Overhead Press",
+          "movement_type": "upper_push"
+        }
+      ]
+    },
+    {
+      "name": "Arms & Shoulders Pump",
+      "notes": "Accessory day — isolation volume.",
+      "exercise_keys": [
+        {
+          "name": "Lateral Raise",
+          "movement_type": "isolation"
+        },
+        {
+          "name": "Cable Fly",
+          "movement_type": "isolation"
+        },
+        {
+          "name": "Tricep Pushdown",
+          "movement_type": "isolation"
+        },
+        {
+          "name": "Barbell Curl",
+          "movement_type": "isolation"
+        }
+      ]
+    },
+    {
+      "name": "Leg Day Complete",
+      "notes": "Quads + hams + calves template.",
+      "exercise_keys": [
+        {
+          "name": "Barbell Back Squat",
+          "movement_type": "lower_compound"
+        },
+        {
+          "name": "Leg Press",
+          "movement_type": "lower_compound"
+        },
+        {
+          "name": "Romanian Deadlift",
+          "movement_type": "lower_hinge"
+        },
+        {
+          "name": "Leg Curl",
+          "movement_type": "isolation"
+        },
+        {
+          "name": "Calf Raise",
+          "movement_type": "isolation"
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "description": "2-month synthetic hypertrophy block (27 sessions, Apr–Jun 2026)",
+    "sessions": 27,
+    "programs": 4,
+    "exercises": 14,
+    "scenarios": [
+      "Bench stall weeks 7-8 (same 95kg×5)",
+      "Squat performance drop weeks 7-8",
+      "RPE creep into deload territory final 2 weeks",
+      "Warmup + working set mix"
+    ]
+  }
+}

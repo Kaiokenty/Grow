@@ -13,4 +13,18 @@ export const queryKeys = {
     ['programExercises', programId] as const,
   weeklySummary: (userId: string, weekStartDay: number) =>
     ['weeklySummary', userId, weekStartDay] as const,
+  muscleHeatmap: (userId: string, weekStartDay: number) =>
+    ['muscleHeatmap', userId, weekStartDay] as const,
+  muscleWeekStats: (userId: string, muscle: string, weekStartDay: number) =>
+    ['muscleWeekStats', userId, muscle, weekStartDay] as const,
+  muscleVolumeHistory: (userId: string, muscle: string, weeks: number) =>
+    ['muscleVolumeHistory', userId, muscle, weeks] as const,
+  fatigueSummary: (userId: string) => ['fatigueSummary', userId] as const,
+  weeklyNlg: (userId: string, weekStartDay: number) =>
+    ['weeklyNlg', userId, weekStartDay] as const,
+  weeklyVolumeHistory: (userId: string, weeks: number) =>
+    ['weeklyVolumeHistory', userId, weeks] as const,
+  trainingBlocks: (userId: string) => ['trainingBlocks', userId] as const,
+  blockSummary: (userId: string, blockId: string) =>
+    ['blockSummary', userId, blockId] as const,
 }

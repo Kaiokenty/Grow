@@ -9,12 +9,16 @@ type WorkoutExerciseCardProps = {
   clientId: string
   exerciseMap: Map<string, Exercise>
   displayUnit: DisplayUnit
+  lastSessionLabels?: Record<string, string>
+  onWorkingSetComplete?: () => void
 }
 
 export const WorkoutExerciseCard = memo(function WorkoutExerciseCard({
   clientId,
   exerciseMap,
   displayUnit,
+  lastSessionLabels = {},
+  onWorkingSetComplete,
 }: WorkoutExerciseCardProps) {
   const exercise = useWorkoutStore((state) =>
     state.exercises.find((row) => row.clientId === clientId),
@@ -59,6 +63,28 @@ export const WorkoutExerciseCard = memo(function WorkoutExerciseCard({
     useWorkoutStore.getState().addSet(clientId)
   }, [clientId])
 
+  const onCompleteSet = useCallback(
+    (setClientId: string) => {
+      const store = useWorkoutStore.getState()
+      const exercise = store.exercises.find((row) => row.clientId === clientId)
+      const set = exercise?.sets.find((row) => row.clientId === setClientId)
+      if (!set) return
+      const markingComplete = !set.completed
+      store.updateSet(clientId, setClientId, { completed: markingComplete })
+      if (
+        markingComplete &&
+        set.setType === 'working' &&
+        set.reps.trim() &&
+        set.weightDisplay.trim() &&
+        set.rpe.trim() &&
+        onWorkingSetComplete
+      ) {
+        onWorkingSetComplete()
+      }
+    },
+    [clientId, onWorkingSetComplete],
+  )
+
   const onRemoveExercise = useCallback(() => {
     useWorkoutStore.getState().removeExercise(clientId)
   }, [clientId])
@@ -70,10 +96,12 @@ export const WorkoutExerciseCard = memo(function WorkoutExerciseCard({
       exercise={exercise}
       meta={meta}
       displayUnit={displayUnit}
+      lastSessionLabel={meta ? lastSessionLabels[meta.id] : null}
       validationErrors={errors}
       onUpdateSet={onUpdateSet}
       onRemoveSet={onRemoveSet}
       onAddSet={onAddSet}
+      onCompleteSet={onCompleteSet}
       onRemoveExercise={onRemoveExercise}
     />
   )

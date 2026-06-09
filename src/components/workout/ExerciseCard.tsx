@@ -20,10 +20,12 @@ type ExerciseCardProps = {
   exercise: SessionExercise
   meta?: Exercise
   displayUnit: DisplayUnit
+  lastSessionLabel?: string | null
   validationErrors: ValidationErrors
   onUpdateSet: (setClientId: string, patch: Partial<SetRow>) => void
   onRemoveSet: (setClientId: string) => void
   onAddSet: () => void
+  onCompleteSet?: (setClientId: string) => void
   onRemoveExercise: () => void
 }
 
@@ -35,7 +37,9 @@ export const ExerciseCard = memo(function ExerciseCard({
   onUpdateSet,
   onRemoveSet,
   onAddSet,
+  onCompleteSet,
   onRemoveExercise,
+  lastSessionLabel,
 }: ExerciseCardProps) {
   const {
     attributes,
@@ -77,6 +81,11 @@ export const ExerciseCard = memo(function ExerciseCard({
                 : ''}
             </p>
           )}
+          {lastSessionLabel && (
+            <p className="mt-1 text-xs text-muted-foreground/80">
+              Last: {lastSessionLabel}
+            </p>
+          )}
         </div>
         <Button
           type="button"
@@ -96,6 +105,7 @@ export const ExerciseCard = memo(function ExerciseCard({
           onUpdateSet={onUpdateSet}
           onRemoveSet={onRemoveSet}
           onAddSet={onAddSet}
+          onCompleteSet={onCompleteSet}
         />
       </CardContent>
     </Card>

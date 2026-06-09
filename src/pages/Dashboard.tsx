@@ -1,99 +1,90 @@
-import { lazy, Suspense } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { MuscleMapExplorer } from '@/components/body-map/MuscleMapExplorer'
+import { DashboardCharts } from '@/components/dashboard/DashboardCharts'
+import { DeloadCard } from '@/components/dashboard/DeloadCard'
+import { WeeklySummaryCard } from '@/components/dashboard/WeeklySummaryCard'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { ResumeDraftBanner } from '@/components/workout/ResumeDraftBanner'
 import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
 import { EmptyState } from '@/components/ui/empty-state'
 import { PageSkeleton } from '@/components/ui/page-skeleton'
 import { useAuth } from '@/hooks/useAuth'
 import { useUserSettings } from '@/hooks/useUserSettings'
 import { useWeeklySummary } from '@/hooks/useWeeklySummary'
-
-const DashboardHeatmapCard = lazy(() =>
-  import('@/components/dashboard/DashboardHeatmapCard').then((m) => ({
-    default: m.DashboardHeatmapCard,
-  })),
-)
+import { formatWeekLabel } from '@/lib/dates'
 
 export function DashboardPage() {
   const navigate = useNavigate()
-  const { user } = useAuth()
+  const { user, loading: authLoading } = useAuth()
   const { data: settings } = useUserSettings(user?.id)
   const weekStartDay = settings?.week_start_day ?? 1
   const displayUnit = settings?.display_unit ?? 'kg'
+  const chartWeeks = settings?.chart_weeks ?? 6
 
-  const { data: summary, isLoading } = useWeeklySummary(user?.id, weekStartDay)
+  const { data: summary, isLoading, isError, error } = useWeeklySummary(
+    user?.id,
+    weekStartDay,
+  )
 
   const hasWorkouts = (summary?.totalWorkouts ?? 0) > 0
-  const tonnageDisplay =
-    summary && displayUnit === 'lbs'
-      ? Math.round(summary.weeklyTonnageKg * 2.2046226218)
-      : summary?.weeklyTonnageKg
+  const weekLabel = summary?.weekStart
+    ? formatWeekLabel(summary.weekStart)
+    : 'This week'
+  const showLoading = authLoading || !user?.id || isLoading
 
   return (
     <div className="space-y-6">
       <PageHeader
         title="Dashboard"
-        description="Progress and fatigue signals appear here after logging."
+        description={`${weekLabel} · Progress and fatigue at a glance`}
         actions={<Button onClick={() => navigate('/workouts')}>Log workout</Button>}
       />
 
       {user?.id && <ResumeDraftBanner userId={user.id} />}
 
-      {isLoading ? (
-        <PageSkeleton rows={4} />
+      {isError ? (
+        <EmptyState
+          title="Could not load dashboard"
+          description={
+            error instanceof Error
+              ? error.message
+              : 'Something went wrong loading your training summary.'
+          }
+          action={
+            <Button onClick={() => window.location.reload()}>Retry</Button>
+          }
+        />
+      ) : showLoading ? (
+        <PageSkeleton rows={8} />
       ) : !hasWorkouts ? (
         <EmptyState
           title="No workouts logged yet"
-          description="Start your first session to see weekly volume and RPE here."
+          description="Start your first session to see volume, muscle balance, and RPE here."
           action={
             <Button onClick={() => navigate('/workouts')}>Start your first workout</Button>
           }
         />
       ) : (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">This week</CardTitle>
-            <CardDescription>Calendar week totals from working sets.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <dl className="grid grid-cols-3 gap-4 text-center sm:max-w-md">
-              <div>
-                <dt className="text-xs text-muted-foreground">Workouts</dt>
-                <dd className="mt-1 text-2xl font-medium tabular-nums">
-                  {summary?.workoutsThisWeek ?? 0}
-                </dd>
-              </div>
-              <div>
-                <dt className="text-xs text-muted-foreground">
-                  Volume ({displayUnit})
-                </dt>
-                <dd className="mt-1 text-2xl font-medium tabular-nums">
-                  {tonnageDisplay?.toLocaleString() ?? 0}
-                </dd>
-              </div>
-              <div>
-                <dt className="text-xs text-muted-foreground">Avg RPE (last 7 days)</dt>
-                <dd className="mt-1 text-2xl font-medium tabular-nums">
-                  {summary?.rolling7dAvgRpe ?? '—'}
-                </dd>
-              </div>
-            </dl>
-          </CardContent>
-        </Card>
-      )}
+        <>
+          {user?.id && (
+            <MuscleMapExplorer
+              userId={user.id}
+              weekStartDay={weekStartDay}
+              displayUnit={displayUnit}
+              variant="dashboard"
+            />
+          )}
 
-      {hasWorkouts && (
-        <Suspense fallback={<PageSkeleton rows={6} />}>
-          <DashboardHeatmapCard />
-        </Suspense>
+          {user?.id && <DeloadCard userId={user.id} />}
+
+          {user?.id && (
+            <WeeklySummaryCard userId={user.id} weekStartDay={weekStartDay} />
+          )}
+
+          {user?.id && (
+            <DashboardCharts userId={user.id} chartWeeks={chartWeeks} />
+          )}
+        </>
       )}
     </div>
   )

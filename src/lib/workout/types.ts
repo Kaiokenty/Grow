@@ -10,6 +10,7 @@ export type SetRow = {
   reps: string
   weightDisplay: string
   rpe: string
+  completed?: boolean
 }
 
 export type SessionExercise = {

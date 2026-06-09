@@ -5,6 +5,7 @@ import { LoggerShell } from '@/components/layout/LoggerShell'
 import { ProtectedRoute } from '@/components/ProtectedRoute'
 import { ForgotPasswordPage } from '@/pages/ForgotPassword'
 import { LoginPage } from '@/pages/Login'
+import { ResetPasswordPage } from '@/pages/ResetPassword'
 import { SignUpPage } from '@/pages/SignUp'
 
 const DashboardPage = lazy(() =>
@@ -16,9 +17,19 @@ const BodyMapPage = lazy(() =>
 const WorkoutsPage = lazy(() =>
   import('@/pages/WorkoutsPage').then((m) => ({ default: m.WorkoutsPage })),
 )
+const WorkoutDetailPage = lazy(() =>
+  import('@/pages/WorkoutDetailPage').then((m) => ({
+    default: m.WorkoutDetailPage,
+  })),
+)
 const WorkoutLoggerPage = lazy(() =>
   import('@/pages/WorkoutLoggerPage').then((m) => ({
     default: m.WorkoutLoggerPage,
+  })),
+)
+const WorkoutSummaryPage = lazy(() =>
+  import('@/pages/WorkoutSummaryPage').then((m) => ({
+    default: m.WorkoutSummaryPage,
   })),
 )
 const ExercisesPage = lazy(() =>
@@ -34,6 +45,9 @@ const ProgramEditorPage = lazy(() =>
 )
 const SettingsPage = lazy(() =>
   import('@/pages/SettingsPage').then((m) => ({ default: m.SettingsPage })),
+)
+const BlocksPage = lazy(() =>
+  import('@/pages/BlocksPage').then((m) => ({ default: m.BlocksPage })),
 )
 
 function PageFallback() {
@@ -52,6 +66,7 @@ export default function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route
             element={
               <ProtectedRoute>
@@ -61,6 +76,7 @@ export default function App() {
           >
             <Route path="workouts/active" element={<WorkoutLoggerPage />} />
             <Route path="workouts/:id/edit" element={<WorkoutLoggerPage />} />
+            <Route path="workouts/:id/summary" element={<WorkoutSummaryPage />} />
           </Route>
           <Route
             element={
@@ -72,9 +88,11 @@ export default function App() {
             <Route index element={<DashboardPage />} />
             <Route path="body-map" element={<BodyMapPage />} />
             <Route path="workouts" element={<WorkoutsPage />} />
+            <Route path="workouts/:id" element={<WorkoutDetailPage />} />
             <Route path="exercises" element={<ExercisesPage />} />
             <Route path="programs" element={<ProgramsPage />} />
             <Route path="programs/:id" element={<ProgramEditorPage />} />
+            <Route path="blocks" element={<BlocksPage />} />
             <Route path="settings" element={<SettingsPage />} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />

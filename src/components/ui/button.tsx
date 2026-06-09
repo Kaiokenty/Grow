@@ -94,13 +94,35 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const Comp = asChild ? Slot : "button";
     const isIconOnly = size === "icon" || size === "icon-sm" || size === "icon-lg";
     const iconSize = size === "sm" ? 14 : size === "lg" ? 20 : 16;
     const shape = useShape();
     const bgClass = active
       ? activeBgVariants[variant ?? "primary"]
       : bgVariants[variant ?? "primary"];
+
+    if (asChild) {
+      return (
+        <Slot
+          ref={ref}
+          className={cn(
+            buttonVariants({
+              variant,
+              size,
+              iconLeft: !isIconOnly && !!LeadingIcon,
+              iconRight: !isIconOnly && !!TrailingIcon,
+            }),
+            shape.button,
+            className,
+          )}
+          {...props}
+        >
+          {children}
+        </Slot>
+      );
+    }
+
+    const Comp = "button";
 
     return (
       <Comp

@@ -3,7 +3,7 @@ import { supabase } from '@/lib/supabase'
 import type { Exercise } from '@/hooks/useExercises'
 
 const EXERCISE_COLUMNS =
-  'id, name, movement_type, muscle_groups, category, is_compound, is_tracked, user_id, created_at, updated_at, e1rm_formula'
+  'id, name, movement_type, muscle_groups, primary_muscle, secondary_muscles, other_muscles, category, is_compound, is_tracked, user_id, created_at, updated_at, e1rm_formula'
 
 export async function fetchExercises(userId: string): Promise<Exercise[]> {
   const { data, error } = await supabase
